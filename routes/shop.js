@@ -35,6 +35,5 @@ router.get("/delete-item/:productId", productController.getDeleteItem);
 
 router.get("/merge-cart", productController.mergeCart);
 
-router.get("/admin", productController.getAdmin);
 
 module.exports = router;

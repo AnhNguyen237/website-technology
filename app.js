@@ -10,6 +10,7 @@ const session = require('express-session');
 const passport = require('passport');
 const shopRouter = require('./routes/shop');
 const authRouter = require('./routes/auth');
+const adminRouter = require('./routes/admin');
 const flash = require('connect-flash');
 const app = express();
 const MongoDBStore = require('connect-mongodb-session')(session);
@@ -56,6 +57,7 @@ app.use(passport.session());
 
 app.use(shopRouter);
 app.use(authRouter);
+app.use(adminRouter);
 
 // pass passport for configuration
 require('./config/passport')(passport);

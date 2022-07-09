@@ -403,10 +403,3 @@ exports.mergeCart = (req, res, next) => {
     res.redirect("/");
   }
 };
-
-exports.getAdmin = (req, res, next) => {
-  res.render('admin/index', {
-    title: 'admin',
-    user: req.user
-  })
-}

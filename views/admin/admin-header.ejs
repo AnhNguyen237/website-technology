@@ -1,0 +1,55 @@
+<header>
+    <a href="/admin"><h1>Trùm Công Nghệ</h1></a>
+  
+  
+    <% if (typeof(user) === 'undefined') { %>
+      <ul class="nav navbar-nav navbar-right" style="margin-right: 20px">
+  
+        <li class="dropdown">
+          <a href="" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-user" aria-hidden="true"></i> User Management</a>
+          <ul class="dropdown-menu">
+            <li><a href="/login"><i class="icon-f-76"></i>Đăng nhập</a></li>
+            <li role="separator" class="divider"></li>
+            <li><a href="/create-account"><i class="icon-f-94"></i>Đăng ký</a></li>
+          </ul>
+        </li>
+      </ul>
+      <% } else { %>
+      <ul class="nav navbar-nav navbar-right" style="margin-right: 20px">
+          <li class="dropdown">
+            <a href="" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-user" aria-hidden="true"></i> User Management </span></a>
+            <ul class="dropdown-menu">
+                <li><a href="/account"><i class="icon-f-94"></i>Tài khoản</a></li>
+              <li role="separator" class="divider"></li>
+              <li><a href="/">Trang bán hàng</a></li>
+              <li role="separator" class="divider"></li>
+              <li><a href="/logout"><i class="icon-f-77"></i>Đăng xuất</a></li>
+            </ul>
+          </li>
+        </ul>
+        <% } %>
+  
+        <ul class="nav navbar-nav navbar-right" style="margin-right: 20px">
+  
+          <li class="dropdown">
+            <a href="" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><%= __('language')%></a>
+            <ul class="dropdown-menu">
+              <li><a href="/change-lang/en">English</a> </li>
+              <li><a href="/change-lang/vi">Việt Nam</a> </li>
+            </ul>
+          </li>
+        </ul>
+  
+          <% if (user == null) { %>
+            <div id="callNow" style="clear: both;">
+              <p id="userName"> </p>
+            </div>
+            <% } else { %>
+              <div id="callNow" style="clear: both;">
+                <center>
+                  <h4 id="welcomeMsg" style="margin-right:20px;">  <%= __('welcome')%>, <%=user.hoten%></h4>
+                </center>
+              </div>
+              <% } %>
+  </header>
+  

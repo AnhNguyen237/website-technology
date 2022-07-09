@@ -1,0 +1,21 @@
+.admin-title {
+    text-align: center;
+}
+
+.table {
+    text-align: center;
+}
+
+.tt-shopping-layout .tt-title {
+    text-align: center;
+}
+
+.box-info {
+    border: 1px solid;
+    padding: 5% 10% 5% 10%;
+}
+
+.couple-button {
+    display: flex;
+    justify-content: center;
+}

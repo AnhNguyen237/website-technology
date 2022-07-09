@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <% include ../partials/head %>
+  </head>
+  <body>
+    <div id="tt-pageContent">
+      <div class="container-indent">
+        <div class="container container-fluid-custom-mobile-padding">
+          <h1 class="tt-title-subpages noborder">Thông tin tài khoản</h1>
+          <div class="tt-shopping-layout">
+            <div class="tt-wrapper">
+              <h3 class="tt-title">Lịch sử đặt hàng</h3>
+              <%if (messageSucc != "undefined") { %>
+              <div
+                class="error"
+                style="background-color: #ffffff; font-weight: bold; color :rgb(0,255,127)"
+              >
+                <%= messageSucc %>
+              </div>
+              <% } %>
+              <%if (messageError != "undefined") { %>
+                <div
+                  class="error"
+                  style="background-color: #ffffff; font-weight: bold; color :rgb(255,0,0)"
+                >
+                  <%= messageError %>
+                </div>
+                <% } %>
+              <div class="tt-table-responsive">
+                <table class="tt-table-shop-01">
+                  <thead>
+                    <tr>
+                      <th>Đơn hàng</th>
+                      <th>Ngày</th>
+                      <th>Địa chỉ</th>
+                      <th>SĐT</th>
+                      <th>Tổng</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <% order.forEach(function(o){ %>
+                    <tr>
+                      <td><a href="javascript:void(0)">#<%= o._id %></a></td>
+                      <td><%= o.date %></td>
+                      <td><%= o.address %></td>
+                      <td>
+                        <%= o.phoneNumber %>
+                      </td>
+                      <td>
+                        $<%= o.cart.totalPrice %> cho <%= o.cart.totalQty %> sản
+                        phẩm
+                      </td>
+                    </tr>
+                    <% }) %>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+            <div class="tt-wrapper">
+              <h6 class="tt-title">Chỉnh sửa thông tin các nhân</h6>
+              <div class="box-info">
+                <div class="form-default">
+                  <form method="POST" action="/admin/edit-account/<%=user._id%>">
+                    <div class="form-group">
+                      <label for="shopInputFirstName" class="control-label"
+                        >Họ *</label
+                      >
+                      <input
+                        type="text"
+                        class="form-control"
+                        id="shopInputFirstName"
+                        name="firstName"
+                        value="<%= user.firstName %>"
+                      />
+                    </div>
+                    <div class="form-group">
+                      <label for="shopInputLastName" class="control-label"
+                        >Tên *</label
+                      >
+                      <input
+                        type="text"
+                        class="form-control"
+                        id="shopInputLastName"
+                        name="lastName"
+                        value="<%= user.lastName %>"
+                      />
+                    </div>
+                    <div class="form-group">
+                      <label for="shopAddress" class="control-label"
+                        >Địa chỉ *</label
+                      >
+                      <input
+                        type="text"
+                        class="form-control"
+                        id="shopAddress"
+                        name="address"
+                        value="<%= user.address %>"
+                      />
+                    </div>
+                    <div class="form-group">
+                      <label for="shopPhone" class="control-label"
+                        >Số Điện Thoại*</label
+                      >
+                      <input
+                        type="text"
+                        class="form-control"
+                        id="shopPhone"
+                        name="phoneNumber"
+                        value="<%= user.phoneNumber %>"
+                      />
+                    </div>
+                    <div class="form-group">
+                      <label for="shopEmail" class="control-label"
+                        >Địa chỉ email *</label
+                      >
+                      <input
+                        type="text"
+                        class="form-control"
+                        id="shopEmail"
+                        name="email"
+                        value="<%= user.email %>"
+                      />
+                    </div>
+                    <div class="row couple-button">
+                      <div class="col-auto">
+                        <button type="submit" class="btn btn-primary">Lưu</button>
+                      </div>
+                      <div class="col-auto align-self-center">
+                        <a href="/admin/manage-accounts" class="tt-link">
+                          <button type="button" class="btn btn-secondary">Hủy</button>
+                        </a>
+                      </div>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <% include ../partials/head %>
+</head>
+  <% include admin-header %>
+<body>
+  <div class="admin-title">
+    <h1>Quản lý tài khoản</h1>
+  </div>
+  <div class="admin-search">
+
+  </div>
+  <div class="admin-container">
+    <table class="table table-accounts">
+      <thead>
+        <tr>
+          <th scope="col">STT</th>
+          <th scope="col">Username</th>
+          <th scope="col">First Name</th>
+          <th scope="col">Last Name</th>
+          <th scope="col">Functions</th>
+          <th scope="col">Detail</th>
+        </tr>
+      </thead>
+      <tbody class="table-group-divider">
+        <% users.forEach((item, index, arr) => { %>
+          <tr>
+            <th scope="row"><%=index+1%></th>
+            <td><%=item.username%></td>
+            <td><%=item.firstName%></td>
+            <td><%=item.lastName%></td>
+            <td>
+              <form action="/admin/block-account/<%=item._id%>" method="post" style="display: inline-block;">
+                <% if(item.isLock) { %>
+                  <button type="submit" class="btn btn-warning block" data-id="<%=item._id%>">Unblock</button>
+                <% }else { %>
+                  <button type="submit" class="btn btn-warning block" data-id="<%=item._id%>">Block</button>
+                <% } %>
+              </form>
+                <button type="button" class="btn btn-danger" data-id="<%=item._id%>" data-bs-toggle="modal" data-bs-target="#confirmModal">Delete</button>
+            </td>
+            <td><a href="/admin/edit-account/<%=item._id%>" style="font-size: 20px; font-weight: 900; text-decoration: none;">...</a></td>
+          </tr>
+        <% }) %>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Modal -->
+<div class="modal fade" id="confirmModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Xóa tài khoản</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        Bạn chắc chắn muốn xóa tài khoản này?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
+        <button type="button" id="btn-delete" class="btn btn-primary delete">Xóa</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- delete hidden form -->
+<form name="delete-form" method="post"></form>
+<!-- delete hidden form -->
+
+</body>
+<script>
+
+  document.addEventListener('DOMContentLoaded', function() {
+    var userId;
+    var deleteForm = document.forms['delete-form'];
+
+    $("#confirmModal").on('show.bs.modal', function(event) {
+    var button = $(event.relatedTarget);
+    var id = button.data('id');
+    userId = id;
+    })
+
+    var btnDelete = document.getElementById('btn-delete');
+    btnDelete.onclick = function() {
+      deleteForm.action = '/admin/delete-account/'+ userId;
+      deleteForm.submit();
+    }
+  })
+</script>
+<% include ../partials/script %>
+</html>
