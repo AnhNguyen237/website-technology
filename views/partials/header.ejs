@@ -1,282 +1,121 @@
-	<!-- tt-mobile menu -->
-	<nav class="panel-menu mobile-main-menu">
-		<ul>
-			<li>
-				<a href="/">Trang chủ</a>
-				<ul>
-					<li>
-						<a href="/">HOME STYLES</a>
-						
-					</li>
-					<li>
-						<a href="/">HOME STYLES</a>
-						
-					</li>
-					<li>
-						<a href="/">HOME SKINS <span class="tt-badge tt-sale">HOT</span></a>
-						
-					</li>
-				</ul>
-			</li>
-			<li>
-				<a href="/products">Cửa hàng</a>
-				
-			</li>
-			
-		</ul>
-		<div class="mm-navbtn-names">
-			<div class="mm-closebtn">Close</div>
-			<div class="mm-backbtn">Back</div>
-		</div>
-	</nav>
-	<!-- tt-mobile-header -->
-	<div class="tt-mobile-header">
-		<div class="container-fluid">
-			<div class="tt-header-row">
-				<div class="tt-mobile-parent-menu">
-					<div class="tt-menu-toggle">
-						<i class="icon-03"></i>
-					</div>
-				</div>
-				<!-- search -->
-				<div class="tt-mobile-parent-search tt-parent-box"></div>
-				<!-- /search -->
-				<!-- cart -->
-				<div class="tt-mobile-parent-cart tt-parent-box"></div>
-				<!-- /cart -->
-				<!-- account -->
-				<div class="tt-mobile-parent-account tt-parent-box"></div>
-				<!-- /account -->
-				<!-- currency -->
-				<div class="tt-mobile-parent-multi tt-parent-box"></div>
-				<!-- /currency -->
-			</div>
-		</div>
-		<div class="container-fluid tt-top-line">
-			<div class="row">
-				<div class="tt-logo-container">
-					<!-- mobile logo -->
-					<a class="tt-logo tt-logo-alignment" href="/"><img src="/images/custom/logo.png" alt=""></a>
-					<!-- /mobile logo -->
-				</div>
-			</div>
-		</div>
-	</div>
-	<!-- tt-desktop-header -->
-	<div class="tt-desktop-header">
-		<div class="container">
-			<div class="tt-header-holder">
-				<div class="tt-col-obj tt-obj-logo">
-					<!-- logo -->
-					<a class="tt-logo tt-logo-alignment" href="/"><img src="/images/custom/logo.png" alt=""></a>
-					<!-- /logo -->
-				</div>
-				<div class="tt-col-obj tt-obj-menu">
-					<!-- tt-menu -->
-					<div class="tt-desctop-parent-menu tt-parent-box">
-						<div class="tt-desctop-menu">
-							<nav>
-								<ul>
-									<li class="dropdown tt-megamenu-col-02 selected">
-										<a href="/">Trang chủ</a>
-										
-									</li>
-									<li class="dropdown megamenu">
-										<a href="/products">Cửa hàng</a>
-									</li>
-									
-								</ul>
-							</nav>
-						</div>
-					</div>
-					<!-- /tt-menu -->
-				</div>
-				<div class="tt-col-obj tt-obj-options obj-move-right">
-					<!-- tt-search -->
-					<div class="tt-desctop-parent-search tt-parent-box">
-						<div class="tt-search tt-dropdown-obj">
-							<button class="tt-dropdown-toggle" data-tooltip="Search" data-tposition="bottom">
-								<i class="icon-f-85"></i>
-							</button>
-							<div class="tt-dropdown-menu">
-								<div class="container">
-									<form method="GET" action="/search">
-										<div class="tt-col">
-											<input type="text" class="tt-search-input" placeholder="Tìm Kiếm Sản Phẩm..." name="searchText">
-											
-											<button class="tt-btn-search" type="submit"></button>
-										
-										</div>
-										<div class="tt-col">
-											<button class="tt-btn-close icon-g-80"></button>
-										</div>
-										<div class="tt-info-text">
-											Bạn đang tìm kiếm gì?
-										</div>
-									</form>
-								</div>
-							</div>
-						</div>
-					</div>
-					<!-- /tt-search -->
-					<!-- tt-cart -->
-					<div class="tt-desctop-parent-cart tt-parent-box">
-						<div class="tt-cart tt-dropdown-obj box-cart" data-tooltip="Cart" data-tposition="bottom" >
-							<button class="tt-dropdown-toggle">
-								<i class="icon-f-39"></i>
-								<span class="tt-badge-cart" ><%= session.cart.numItems%></span>
-							</button>
-							<div class="tt-dropdown-menu">
-								<div class="tt-mobile-add">
-									<h6 class="tt-title">Giỏ hàng</h6>
-									<button class="tt-close">Đóng</button>
-								</div>
-								<div class="tt-dropdown-inner">
-									<div class="tt-cart-layout">
-										<!-- layout emty cart -->
-										<!-- <a href="/empty-cart.html" class="tt-cart-empty">
-											<i class="icon-f-39"></i>
-											<p>No Products in the Cart</p>
-										</a> -->
-										<div class="tt-cart-content" >
-											
-											<div class="tt-cart-list">
-												<% if(session.cart.numItems == 0){ %>
-													<div class="tt-item">Không có sản phẩm trong giỏ</div>
-													<% } %>
-												<% if(cartProduct != null){
-													var i = 0;
-													cartProduct.forEach(function(item){
-													if(i == 3){
-														return;
-													}
-													%>
-												<div class="tt-item">
-													
-													
-													<a href="/product/<%= item.item._id %>">
-														<div class="tt-item-img">
-															<img src="http://bros-admin.herokuapp.com/assets/images/<%= item.images %>" data-src="http://bros-admin.herokuapp.com/assets/images/<%= item.images %>" alt="">
-														</div>
-														<div class="tt-item-descriptions">
-															<h2 class="tt-title"><%= item.item.name %></h2>
-															
-															<div class="tt-quantity"><%= item.qty %> X</div> <div class="tt-price">$<%= item.item.price %></div>
-														</div>
-													</a>
-													
-													
-												</div>
-												<% i++;})
-												if(session.cart.numItems > 3){
-												%>
-												<h6><center><a href="/shopping_cart">...</a></center></h6>
-												<% }} %>
-												
-											</div>
-											<div class="tt-cart-total-row">
-												<div class="tt-cart-total-title">Tổng tiền:</div>
-												<div class="tt-cart-total-price">$<%= session.cart.totalPrice %></div>
-											</div>
-											<div class="tt-cart-btn">
-												<% if(session.cart.numItems != 0){ %>
-													<div class="tt-item">
-													<%if (typeof(user) !== 'undefined' && user.isAuthenticated) { %>
-													<a href="/add-order" class="btn">Chuyển đến thanh toán</a>
-													<% }else if(typeof(user) == 'undefined'){ %>
-														<a href="/login" class="btn">Đăng nhập để thanh toán</a>
-														
-														<% }else if(typeof(user) !== 'undefined' && !user.isAuthenticated){ %>
-															<a href="/verify-email" class="btn">Kích hoạt email để thanh toán</a>
-															<% } %>
-												</div>
-													<% } %>
-												
-												<div class="tt-item">
-													<a href="/shopping_cart" class="btn-link-02 tt-hidden-mobile">Xem giỏ hàng</a>
-													<a href="/shopping_cart" class="btn btn-border tt-hidden-desctope">Xem giỏ hàng</a>
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-					<!-- /tt-cart -->
-					<!-- tt-account -->
-					<div class="tt-desctop-parent-account tt-parent-box">
-						<div class="tt-account tt-dropdown-obj">
-							<button class="tt-dropdown-toggle"  data-tooltip="Tài khoản của tôi" data-tposition="bottom"><i class="icon-f-94"></i></button>
-							<div class="tt-dropdown-menu">
-								<div class="tt-mobile-add">
-									<button class="tt-close">Close</button>
-								</div>
-								<div class="tt-dropdown-inner">
-									<ul>
-											<%if (typeof(user) !== 'undefined') { %>
-												<li>Xin chào, <%= user.username %></a></li>
-												<li><a href="/account"><i class="icon-f-94"></i>Tài khoản</a></li>
-												<% if(user.isAuthenticated) {%>
-												<li><a href="/shopping_cart"><i class="icon-f-68"></i>Thanh toán</a></li>
-												<% } %>
-												<% if(!user.isAuthenticated) {%>
-													<li><a href="/verify-email"><i class="icon-f-68"></i>Xác thực email</a></li>
-												<% }} %>
-									    
-										
-										
-										<%if (typeof(user) !== 'undefined') { %>
-											<li><a href="/logout"><i class="icon-f-77"></i>Đăng xuất</a></li>
-											<% } %>
+<header class='header'>
+    <div class='grid wide'>
+        <nav class='header__navbar hide-on-mobile-tablet'>
+            <ul class='header__navbar-list'>
+                <li class='header__navbar-item header__navbar-item--has-qr header__navbar-item--separate'>
+                    <a class='header__store' href='/products'>Cửa hàng</a>
+                </li>
+                <li class='header__navbar-item'>
+                    <span class='header__navbar-title--no-pointer'>Kết nối</span>
 
-											<%if (typeof(user) === 'undefined') { %>
-												<li><a href="/login"><i class="icon-f-76"></i>Đăng nhập</a></li>
-									    
-									    <li><a href="/create-account"><i class="icon-f-94"></i>Đăng ký</a></li>
-												<% } %>
-									    
-									</ul>
-								</div>
-							</div>
+                    <a href='' class='header__navbar-icon-link'>
+                        <i class='header__navbar-icon fab fa-facebook'></i>
+                    </a>
+                    <a href='' class='header__navbar-icon-link'>
+                        <i class='header__navbar-icon fab fa-instagram'></i>
+                    </a>
+                </li>
+            </ul>
+            <ul>
+				<i class="fa-solid fa-user"></i>
+				<%if (typeof(user) === 'undefined') { %>
+					<li class="header__link-item">
+						<a href="/create-account" class="header-link">Đăng ký |</a>
+					</li>
+
+					<li class="header__link-item">
+						<a href="/login" class="header-link">Đăng nhập</a>
+					</li>
+				<% } %>
+				<%if (typeof(user) !== 'undefined') { %>
+					<li class="header-logined">
+						<a href="#" class="header-link">Xin chào,
+							<%= user.username %></a>
+						<div class="header-account">
+							<ul class="header-account__item">
+								<li>
+									<a href="/account" class="link-account">
+										<i class="fa-solid fa-file-invoice"></i>Tài khoản
+									</a>
+								</li>
+								<% if(!user.isAuthenticated) {%>
+									<li>
+										<a href="/verify-email" class="link-account">
+											<i class="fa-solid fa-envelope"></i>Xác thực email
+										</a>
+									</li>
+								<% } else { %>
+									<li>
+										<a href="/change-password" class="link-account">
+											<i class="fa-solid fa-lock"></i>Đổi mật khẩu
+										</a>
+									</li>
+								<% } %>
+								<% if(user.username == 'admin') { %>
+									<li>
+										<a href="/admin" class="link-account">
+										  <i class="fa-solid fa-right-left"></i>
+											Trang admin
+										</a>
+									  </li>
+								<% } %>
+								<li>
+									<a href="/logout" class="link-account">
+										<i class="fa-solid fa-right-from-bracket"></i>
+										Đăng xuất
+									</a>
+								</li>
+							</ul>
 						</div>
+					</li>
+				<% } %>
+			</ul>
+		</nav>
+
+		<!-- Header with Search -->
+		<div class='header-with-search'>
+			<label for='mobile-search-checkbox' class='header__mobile-search'>
+				<i class='header__mobile-search-icon fas fa-search'></i>
+			</label>
+
+			<!-- Header Logo -->
+			<div class='header__logo hide-on-tablet'>
+				<a href='/' class='header__logo-link'>
+					<div class='logo-box__img'>
+						<img class='header__logo-img' src='/images/custom/logo.png' alt=''>
 					</div>
-					<!-- /tt-account -->
-					<!-- tt-langue and tt-currency -->
-					<div class="tt-desctop-parent-multi tt-parent-box">
-						<div class="tt-multi-obj tt-dropdown-obj">
-							<button class="tt-dropdown-toggle" data-tooltip="Cài đặt" data-tposition="bottom"><i class="icon-f-79"></i></button>
-							<div class="tt-dropdown-menu">
-								<div class="tt-mobile-add">
-									<button class="tt-close">Đóng</button>
-								</div>
-								<div class="tt-dropdown-inner">
-									<ul>
-										<li class="active"><a href="/#">Tiếng Việt</a></li>
-										
-									</ul>
-									<ul>
-										<li class="active"><a href="/#"><i class="icon-h-59"></i>VND - Việt Nam Đồng</a></li>
-										<li><a href="/#"><i class="icon-h-60"></i>USD - Dollar</a></li>
-									</ul>
-								</div>
-							</div>
-						</div>
+					<div class='logo-box__text'>
+						<div class='text-logo'>Trùm</div>
+						<div class='text-logo'>Công Nghệ</div>
 					</div>
-					<!-- /tt-langue and tt-currency -->
+				</a>
+			</div>
+			<input
+			type='checkbox' hidden id='mobile-search-checkbox' class='header__search-checkbox'/>
+			<!-- Header Search -->
+			<div class='header__search '>
+				<form class='header__form-search' method='GET' action='/search'>
+					<div class='header__search-input-wrap'>
+						<input
+						type='text' class='header__search-input' placeholder='Nhập để tìm kiếm sản phẩm' name='searchText'/>
+
+					<!-- Search history -->
+					</div>
+					<button type='submit' class='header__search-btn'>
+						<i class='header__search-btn-icon fas fa-search'></i>
+					</button>
+				</form>
+			</div>
+
+			<!-- Cart layout -->
+			<div class='header__cart'>
+				<div class='header__cart-wrap'>
+					<a href="/shopping_cart">
+						<i class='header__cart-icon fas fa-shopping-cart'></i>
+						<span class='header__cart-notice'><%= session.cart.numItems%></span>
+					</a>
 				</div>
 			</div>
 		</div>
 	</div>
-	<!-- stuck nav -->
-	<div class="tt-stuck-nav">
-		<div class="container">
-			<div class="tt-header-row ">
-				<div class="tt-stuck-parent-menu"></div>
-				<div class="tt-stuck-parent-search tt-parent-box"></div>
-				<div class="tt-stuck-parent-cart tt-parent-box"></div>
-				<div class="tt-stuck-parent-account tt-parent-box"></div>
-				<div class="tt-stuck-parent-multi tt-parent-box"></div>
-			</div>
-		</div>
-	</div>
+</header>

@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang='en'>
+    <head>
+        <% include ../partials/head %>
+    </head>
+    <body>
+        <% include admin-header %>
+        <div class='tt-breadcrumb'>
+            <div class='container'>
+                <ul>
+                    <li>
+                        <a href='/admin'>Trang chủ</a>
+                    </li>
+                    <li>
+                        <a href='/admin/manage-products'>Quản lý sản phẩm</a>
+                    </li>
+                    <li>Thêm sản phẩm</li>
+                </ul>
+            </div>
+        </div>
+        <div id='tt-pageContent'>
+            <div class='container-indent'>
+                <div class='container container-fluid-custom-mobile-padding'>
+                    <h1 class='tt-title-subpages noborder'>Thêm sản phẩm</h1>
+                    <div class='tt-shopping-layout'>
+                        <div class='tt-wrapper'>
+                            <h6 class='tt-title'>Thêm mới sản phẩm vào cửa hàng</h6>
+                            <div class='box-info'>
+                                <div class='form-default'>
+                                    <form method='POST' action='/admin/add-product'>
+                                        <div class='form-group'>
+                                            <label for='productName' class='control-label'>Tên sản phẩm *</label>
+                                            <input type='text' class='form-control' id='product-name' name='name'/>
+                                        </div>
+                                        <div class='form-group'>
+                                            <label for='product-desc' class='control-label'>Mô tả *</label>
+                                            <input type='text' class='form-control' id='product-desc' name='description'/>
+                                        </div>
+                                        <div class='form-group'>
+                                            <label for='product-stock' class='control-label'>Số lượng *</label>
+                                            <input type='number' class='form-control' id='product-stock' name='stock'/>
+                                        </div>
+                                        <div class='form-group'>
+                                            <label for='product-price' class='control-label'>Giá *</label>
+                                            <input type='number' class='form-control' id='product-price' name='price'/>
+                                        </div>
+                                        <div class='form-group'>
+                                            <label for='product-color' class='control-label'>Màu sắc *</label>
+                                            <input type='text' class='form-control' id='product-color' name='color'/>
+                                        </div>
+                                        <div class='form-group'>
+                                            <label for='product-pattern' class='control-label'>Loại sản phẩm *</label>
+                                            <input type='text' class='form-control' id='product-pattern' name='pattern'/>
+                                        </div>
+                                        <div class='form-group'>
+                                            <label for='product-add-image' class='control-label'>Thêm hình ảnh *</label>
+                                            <input type='text' class='form-control' id='product-add-image' name='add-image' placeholder='https://images/ao-dep.jpg'/>
+                                        </div>
+
+                                        <div class='row couple-button'>
+                                            <div class='col-auto'>
+                                                <button type='submit' class='btn btn-primary'>Lưu</button>
+                                            </div>
+                                            <div class='col-auto align-self-center'>
+                                                <a href='/admin/manage-products' class='tt-link'>
+                                                    <button type='button' class='btn btn-secondary'>Hủy</button>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- delete hidden form -->
+        <form name='delete-form' method='post'></form>
+        <!-- delete hidden form -->
+
+        <!-- Modal -->
+        <div class='modal fade' id='deleteImage' tabindex='-1' aria-labelledby='exampleModalLabel' aria-hidden='true'>
+            <div class='modal-dialog'>
+                <div class='modal-content'>
+                    <div class='modal-header'>
+                        <h5 class='modal-title' id='exampleModalLabel'>Xóa hình ảnh</h5>
+                        <button type='button' class='btn-close' data-bs-dismiss='modal' aria-label='Close'></button>
+                    </div>
+                    <div class='modal-body'>
+                        Bạn chắc chắn muốn xóa ảnh này?
+                    </div>
+                    <div class='modal-footer'>
+                        <button type='button' class='btn btn-secondary' data-bs-dismiss='modal'>Hủy</button>
+                        <button type='button' id='btn-delete' class='btn btn-primary delete'>Xóa</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+    <script>
+
+        document.addEventListener('DOMContentLoaded', function () {
+            var productId = document.getElementById('productId').textContent;
+            var imageName;
+            var deleteForm = document.forms['delete-form'];
+
+            $('#deleteImage').on('show.bs.modal', function (event) {
+                var button = $(event.relatedTarget);
+                var name = button.data('id');
+                console.log(name);
+                imageName = name;
+            })
+
+            var btnDelete = document.getElementById('btn-delete');
+            btnDelete.onclick = function () {
+                deleteForm.action = '/admin/edit-product/delete-image/' + productId + '?image=' + imageName;
+                deleteForm.submit();
+            }
+        })
+    </script>
+    <% include ../partials/script %>
+</html>

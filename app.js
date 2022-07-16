@@ -2,6 +2,7 @@ require('dotenv').config();
 
 const createError = require('http-errors');
 const express = require('express');
+const multer = require('multer');
 const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
@@ -54,6 +55,20 @@ app.use((req, res, next) => {
 });
 app.use(passport.initialize());
 app.use(passport.session());
+
+const storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, 'public/images/product');
+  },
+  filename: function (req, file, cb) {
+    const filename = Date.now() + '-' + Math.round(Math.random()*1E9);
+    cb(null, filename + '-' + file.originalname);
+  }
+})
+
+const upload = multer({storage: storage});
+
+
 
 app.use(shopRouter);
 app.use(authRouter);

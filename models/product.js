@@ -10,7 +10,7 @@ const productSchema = new Schema({
   description: {
     type: String,
     required: false,
-    default: "Một sản phẩm từ Bros"
+    default: "Một sản phẩm từ Trùm Công Nghệ"
   },
   stock: {
     type: Number,

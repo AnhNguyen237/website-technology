@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang='en'>
+    <head>
+        <% include ../partials/head %>
+    </head>
+    <body>
+        <% include admin-header %>
+        <div class='tt-breadcrumb'>
+            <div class='container'>
+                <ul>
+                    <li>
+                        <a href='/admin'>Trang chủ</a>
+                    </li>
+                    <li>Quản lý đơn hàng</li>
+                </ul>
+            </div>
+        </div>
+        <div class='admin-wrap-content'>
+            <div class='admin-title'>
+                <h1>Quản lý sản phẩm</h1>
+            </div>
+            <div class='admin-search' style='justify-content: center;'>
+                <div class='admin-search-box'>
+                    <input type='text' id='searchText' class='admin-search-input' placeholder='Tìm kiếm đơn hàng' name='searchText'>
+                    <button type='button' id='button-search' class='btn-search-product'>
+                        <i class='fa-solid fa-magnifying-glass'></i>
+                    </button>
+                </div>
+            </div>
+            <div class='admin-container'>
+                <table class='table table-accounts'>
+                    <thead>
+                        <tr>
+                            <th scope='col'>STT</th>
+                            <th scope='col'>Mã đơn hàng</th>
+                            <th scope='col'>Ngày đặt</th>
+                            <th scope='col'>Số điện thoại</th>
+                            <th scope='col'>Chi tiết</th>
+                        </tr>
+                    </thead>
+                    <tbody class='table-group-divider'>
+                        <% orders.forEach((item, index, arr) => { %>
+                            <tr>
+                                <th scope='row'><%=index+1%></th>
+                                <td><%=item._id%></td>
+                                <td><%=item.date%></td>
+                                <td><%=item.phoneNumber%></td>
+                                <td>
+                                    <a href='/admin/order-detail/<%=item._id%>' style='font-size: 20px; font-weight: 900; text-decoration: none;'>...</a>
+                                </td>
+                            </tr>
+                        <% }) %>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+    </body>
+    <% include ../partials/script %>
+    <script>
+
+        $(document).ready(function () {
+            $('#button-search').click(function () {
+                var searchText = document.getElementById('searchText').value
+                $.get(`/admin/search-order?searchText=${searchText}`, function (data) {
+                    if (!data) {
+                        document.querySelector('.admin-container').innerHTML = 'Không tìm thấy kết quả phù hợp';
+                    } else {
+                        document.querySelector('.admin-container').innerHTML = `
+                        <table class='table table-accounts'>
+                            <thead>
+                                <tr>
+                                    <th scope='col'>STT</th>
+                                    <th scope='col'>Mã đơn hàng</th>
+                                    <th scope='col'>Ngày đặt</th>
+                                    <th scope='col'>Số điện thoại</th>
+                                    <th scope='col'>Chi tiết</th>
+                                </tr>
+                            </thead>
+                            <tbody class='table-group-divider'>
+                                <tr>
+                                    <th scope='row'>1</th>
+                                    <td>${data._id}</td>
+                                    <td>${data.date}</td>
+                                    <td>${data.phoneNumber}</td>
+                                    <td>
+                                        <a href='/admin/order-detail/${data._id}' style='font-size: 20px; font-weight: 900; text-decoration: none;'>...</a>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        `
+                    }
+                    
+                })
+            })
+        })
+    </script>
+</html>

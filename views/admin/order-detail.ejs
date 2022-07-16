@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang='en'>
+    <head>
+        <% include ../partials/head %>
+    </head>
+    <body>
+        <% include admin-header %>
+        <div class='tt-breadcrumb'>
+            <div class='container'>
+                <ul>
+                    <li>
+                        <a href='/admin'>Trang chủ</a>
+                    </li>
+                    <li>
+                        <a href='/admin/manage-orders'>Quản lý đơn hàng</a>
+                    </li>
+                    <li>Chi tiết đơn hàng</li>
+                </ul>
+            </div>
+        </div>
+        <div id='tt-pageContent'>
+            <div class='container-indent'>
+                <div class='container container-fluid-custom-mobile-padding'>
+                    <h1 class='tt-title-subpages noborder'>Chi tiết đơn hàng</h1>
+                    <div class='tt-shopping-layout'>
+                        <div class='tt-wrapper'>
+                            <h6 class='tt-title'>Chỉnh sửa thông tin đơn hàng</h6>
+                            <div class='box-info'>
+                                <div class='form-default'>
+                                    <form method='POST' action='/admin/order-detail/<%=order._id%>'>
+                                        <div class='form-group'>
+                                            <label for='customer-name' class='control-label'>Username</label>
+                                            <input type='text' class='form-control' id='customer-name' name='username' value="<%= username %>" disabled/>
+                                        </div>
+                                        <div class='form-group'>
+                                            <label for='order-address' class='control-label'>Địa chỉ</label>
+                                            <input type='text' class='form-control' id='order-address' name='address' value="<%= order.address %>"/>
+                                        </div>
+                                        <div class='form-group'>
+                                            <label for='order-phone-number' class='control-label'>Số điện thoại</label>
+                                            <input type='number' class='form-control' id='order-phone-number' name='phoneNumber' value="<%= order.phoneNumber %>"/>
+                                        </div>
+                                        <div class='form-group'>
+                                            <label for='product-number' class='control-label'>Số lượng sản phẩm</label>
+                                            <input type='number' class='form-control' id='product-number' name='number' value='<%= order.cart.totalQty %>' disabled/>
+                                        </div>
+                                        <div class='form-group'>
+                                            <label for='order-total' class='control-label'>Tổng thanh toán</label>
+                                            <input type='number' class='form-control' id='order-total' name='total' value='<%= order.cart.totalPrice %>' disabled/>
+                                        </div>
+                                        <div class='form-group'>
+                                            <label for='order-date' class='control-label'>Thời gian đặt hàng</label>
+                                            <input type='text' class='form-control' id='order-date' name='date' value="<%= order.date %>" disabled/>
+                                        </div>
+
+                                        <div class='row couple-button'>
+                                            <div class='col-auto'>
+                                                <button type='submit' class='btn btn-primary'>Lưu</button>
+                                            </div>
+                                            <div class='col-auto align-self-center'>
+                                                <a href='/admin/manage-orders' class='tt-link'>
+                                                    <button type='button' class='btn btn-secondary'>Hủy</button>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+    <% include ../partials/script %>
+</html>

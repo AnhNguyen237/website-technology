@@ -1,12 +1,192 @@
+/* admin-header */
+:root {
+    --white-color: #fff;
+    --black-color: #000;
+    --text-color: #333;
+    --text-content-color: #8e7171;
+    --button-primary: #188fff;
+    --button-hover: #0f69ff;
+
+}
+
+* {
+    box-sizing: inherit;
+}
+
+html {
+    font-size: 62.5%;
+    line-height: 1.6rem;
+    font-family: 'Roboto', sans-serif;
+}
+
+ul {
+    list-style: none;
+}
+
+/* Animation */
+@keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+a {
+    text-decoration: none!important;
+}
+
+.wrapper {
+    height: 138px;
+    background-color: #9c5050;
+}
+
+.gird {
+width: 1200px;
+height: 100%;
+max-width: 100%;
+margin: auto;
+}
+
+.header-navbar__top {
+height: 36px;
+display: flex;
+justify-content: space-between;
+align-items: center;
+}
+
+.header-navbar__items {
+display: flex;
+align-items: center;
+}
+
+.header__link-item {
+display: inline-block;
+}
+
+.header-link {
+font-size: 1.3rem;
+color: var(--white-color);
+}
+
+.fa-solid,
+.fa-brands {
+margin: 5px;
+font-size: 1.3rem;
+}
+
+.fa-house-signal {
+font-size: 4rem;
+}
+
+.fa-user {
+color: var(--white-color);
+}
+
+.header-link:hover {
+cursor: pointer;
+color: rgba(255, 255, 255, 0.7);
+}
+
+.admin-header__logo {
+flex: 1;
+display: flex;
+justify-content: center;
+}
+
+.admin-header__logo-img {
+height: 4rem;
+}
+
+.logo {
+font-family: 'Dancing Script', cursive;
+font-size: 3rem;
+font-weight: bolder;
+color: var(--white-color);
+text-decoration: none;
+}
+
+.header-account {
+display: none;
+font-size: 1.3rem;
+width: 128px;
+background-color: var(--white-color);
+position: absolute;
+left: 28px;
+top: 118%;
+animation: fadeIn ease-in 0.3s;
+z-index: 2
+}
+
+.header-account::before {
+position: absolute;
+top: -22px;
+content: "";
+border: 15px solid;
+border-color: transparent transparent var(--white-color) transparent;
+right: 84px;
+}
+
+.header-account::after {
+position: absolute;
+content: "";
+right: 0px;
+top: -7px;
+width: 142px;
+height: 15px;
+}
+
+
+.link-account {
+color: var(--text-color);
+}
+
+.link-account:hover {
+cursor: pointer;
+color: rgba(18, 4, 41, 0.5);
+}
+
+.header-account__item {
+padding: 0.5rem;
+}
+
+.header-logined {
+display: inline-block;
+position: relative;
+border-radius: 2px;
+}
+
+.header-logined:hover .header-account {
+display: block;
+}
+
+  /* admin header */
+
+/* admin index */
+.admin-wrap-content {
+    padding: 5% 10%;
+}
+
+.function-admin {
+    margin: 5%
+}
+/* admin index */
+
+
+
+
+
+/* manage account */
 .admin-title {
     text-align: center;
 }
 
-.table {
-    text-align: center;
+.admin-container {
+    font-size: 18px;
 }
 
-.tt-shopping-layout .tt-title {
+.table {
     text-align: center;
 }
 
@@ -18,4 +198,74 @@
 .couple-button {
     display: flex;
     justify-content: center;
+}
+
+
+/* manage-product */
+
+.admin-search {
+    display: flex;
+    justify-content: space-between;
+    padding: 28px;
+}
+
+.admin-search-box {
+    width: 40%;
+    font-size: 20px;
+}
+
+.admin-search-input {
+    width: 80%;
+    border-radius: 4px;
+}
+
+.btn-search-product {
+    width: 16%;
+    background-color: red;
+    border-radius: 4px;
+}
+
+.btn-search-product:hover {
+    background-color: rgb(173, 83, 83);
+}
+
+.fa-magnifying-glass {
+    color: white;
+    font-size: 18px;
+}
+
+.admin-with-search {
+    font-size: 20px;
+}
+
+.admin-add-product {
+    font-size: 16px!important;
+}
+
+
+.admin-product-img {
+    width: 200px;
+    height: 150px;
+    border: 1px solid;
+    margin: 5px;
+}
+
+.admin-product-img:hover {
+    cursor: pointer;
+    opacity: 0.5;
+}
+
+
+/* Thống kê doanh số */
+.chart-statistics__select {
+    margin-top: 56px;
+}
+
+.select__form,
+.display__selected {
+    margin: 12px;
+}
+
+#btn-submit__selected {
+    margin-top: 12px;
 }
