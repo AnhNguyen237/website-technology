@@ -24,5 +24,7 @@ router.get('/admin/order-detail/:orderId', adminController.isAdminLoggedin, admi
 router.post('/admin/order-detail/:orderId', adminController.isAdminLoggedin, adminController.postOrderDetail);
 
 router.get('/admin/statistics', adminController.isAdminLoggedin, adminController.getStatistics);
+router.post('/admin/statistics/query', adminController.isAdminLoggedin, adminController.postStatisticsQuery);
+router.get('/admin/statistics/chart', adminController.isAdminLoggedin, adminController.getStatisticsChart);
 
 module.exports = router;

@@ -285,7 +285,6 @@ exports.addToCart = (req, res, next) => {
     }
     cart.add(product, prodId);
     req.session.cart = cart;
-    console.log(cart);
     if (req.user) {
       req.user.cart = cart;
       req.user.save();

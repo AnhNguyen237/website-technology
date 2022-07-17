@@ -64,252 +64,178 @@
                     <div class="form-statistics__box">
                         <div class="select__form">
                             <p>Chọn cách thống kê doanh số</p>
-                            <select id="type" name="loai" onchange="myFunction()">
-                                <option value="none">none
-                                <option value="ngay">Ngày
-                                <option value="thang">Tháng
-                                <!-- <option value="quy">Quý -->
-                                <option value="nam">Năm
+                            <select id="type" name="type" onchange="myFunction()">
+                                <option value="none">none</option>
+                                <option value="year">Năm</option>
+                                <option value="total">Tổng doanh thu</option>
                             </select>
                         </div>
                         <div class="display__selected">
-                            <form  method="POST" action="/admin/statistics/query">
-                                <input type="date" name="bday" id="ngay">
-                                <input type="month" name="bmonth" id="thang">
-                                <input type="number" name="byear" id="nam" min="1900" max="2099" step="1" value="2018">
+                            <input type="number" name="year" id="year" min="2022" max="2222" step="1" value="2022">
+                            <input type="text" name="all" id="total" value="null" disabled>
 
-                                <button type="submit" class="btn btn-primary" id="btn-submit__selected">Submit</button>
-                            </form>
+                            <button type="button" class="btn btn-primary" id="btn-submit__selected">Submit</button>
                             
                         </div>
                     </div>
                 </div>
                 
 
-                <!-- <div class="day-statistics-chart">
-                    <div id="day-statistics-chart" style="height: 370px; width: 100%;"></div>
-                    <div id="month-statistics-chart" style="height: 370px; width: 100%;"></div>
+                <div class="statistics-chart">
                     <div id="year-statistics-chart" style="height: 370px; width: 100%;"></div>
-                </div> -->
+                </div>
             </div>
         </div>
 </body>
 <% include ../partials/script %>
 <script>
+
+    var year = document.getElementById("year");
+    var total = document.getElementById("total");
+    var btnSubmit = document.getElementById("btn-submit__selected");
+    var x;
+
     document.getElementById("type").value="none";
-    document.getElementById("ngay").style.display="none";
-    document.getElementById("thang").style.display="none";
-    document.getElementById("nam").style.display="none";
-    document.getElementById("btn-submit__selected").style.display="none";
+    year.style.display="none";
+    total.style.display="none";
+    btnSubmit.style.display="none";
+
+    function postData(data, callback) {
+    var options = {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: data
+        };
+        fetch('/admin/statistics/query', options)
+            .then(function(response) {
+                response.json();
+            })
+            .then(callback)
+            .catch(function(err) {
+                alert('Failed!!!');
+            })
+    }
 
     function myFunction() {
-    var ngay = document.getElementById("ngay");
-    var thang = document.getElementById("thang");
-    var nam = document.getElementById("nam");
-    var btnSubmit = document.getElementById("btn-submit__selected");
-    var x = document.getElementById("type").value;
+        x = document.getElementById("type").value;
 
-    if(x=="ngay")
-    {
-        ngay.style.display="block";
-        thang.style.display="none";
-        nam.style.display="none";
+        if(x=="year") {
+            year.style.display="block";
+        }else  if(x=="total") {
+            year.style.display="none";
+        }
+        btnSubmit.style.display="block";
+        if(x =="none") {
+            year.style.display="none";
+            btnSubmit.style.display="none";
+        }
     }
-    else  if(x=="thang")
-    {
-        ngay.style.display="none";
-        thang.style.display="block";
-        nam.style.display="none";
-    }
-    else  if(x=="nam")
-    {
-        ngay.style.display="none";
-        thang.style.display="none";
-        nam.style.display="block";
-    }
-    btnSubmit.style.display="block";
-    }
-    window.onload = function () {
-    // Thống kê theo ngày
-    var chartDay = new CanvasJS.Chart("day-statistics-chart", {
-        exportEnabled: true,
-        animationEnabled: true,
-        title:{
-            text: "Biểu đồ doanh thu theo ngày",
-            fontfamily: "tahoma",          
-            fontSize: 25,  
-            padding: 24       
-        }, 
-        axisX: {
-            title: "Loại sản phẩm"
-        },
-        axisY: {
-            title: "Doanh Thu",
-            titleFontColor: "#4F81BC",
-            lineColor: "#4F81BC",
-            labelFontColor: "#4F81BC",
-            tickColor: "#4F81BC",
-            includeZero: true,
-            fontSize: 25
-        },
-        axisY2: {
-            title: "Số sản phẩm bán ra",
-            titleFontColor: "#C0504E",
-            lineColor: "#C0504E",
-            labelFontColor: "#C0504E",
-            tickColor: "#C0504E",
-            includeZero: true,
-            fontSize: 25
-        },
-        toolTip: {
-            shared: true
-        },
-        data: [{
-            type: "column",
-            name: "Doanh thu",
-            showInLegend: true,      
-            yValueFormatString: "#,##0.# VNĐ",
-            dataPoints: [
-                { label: "Điện thoại",  y: 250000000 },
-                { label: "Laptop", y: 500000000 },
-                { label: "Máy tính bảng", y: 750000000 },
-            ]
-        },
-        {
-            type: "column",
-            name: "Số sản phẩm bán ra",
-            axisYType: "secondary",
-            showInLegend: true,
-            yValueFormatString: "#,##0.# Sản phẩm",
-            dataPoints: [
-                { label: "Điện thoại", y: 25 },
-                { label: "Laptop", y: 30 },
-                { label: "Máy tính bảng", y: 35 },
-            ]
-        }]
-    });
-    chartDay.render();
 
-    // Thống kê theo tháng
-    var chartMonth = new CanvasJS.Chart("day-statistics-chart", {
-        exportEnabled: true,
-        animationEnabled: true,
-        title:{
-            text: "Biểu đồ doanh thu theo tháng",
-            fontfamily: "tahoma",          
-            fontSize: 25,  
-            padding: 24       
-        }, 
-        axisX: {
-            title: "Loại sản phẩm"
-        },
-        axisY: {
-            title: "Doanh Thu",
-            titleFontColor: "#4F81BC",
-            lineColor: "#4F81BC",
-            labelFontColor: "#4F81BC",
-            tickColor: "#4F81BC",
-            includeZero: true,
-            fontSize: 25
-        },
-        axisY2: {
-            title: "Số sản phẩm bán ra",
-            titleFontColor: "#C0504E",
-            lineColor: "#C0504E",
-            labelFontColor: "#C0504E",
-            tickColor: "#C0504E",
-            includeZero: true,
-            fontSize: 25
-        },
-        toolTip: {
-            shared: true
-        },
-        data: [{
-            type: "column",
-            name: "Doanh thu",
-            showInLegend: true,      
-            yValueFormatString: "#,##0.# VNĐ",
-            dataPoints: [
-                { label: "Điện thoại",  y: 250000000 },
-                { label: "Laptop", y: 500000000 },
-                { label: "Máy tính bảng", y: 750000000 },
-            ]
-        },
-        {
-            type: "column",
-            name: "Số sản phẩm bán ra",
-            axisYType: "secondary",
-            showInLegend: true,
-            yValueFormatString: "#,##0.# Sản phẩm",
-            dataPoints: [
-                { label: "Điện thoại", y: 25 },
-                { label: "Laptop", y: 30 },
-                { label: "Máy tính bảng", y: 35 },
-            ]
-        }]
-    });
-    chartMonth.render();
+    $('#btn-submit__selected').click(function() {
+        let data = {
+            date: ''
+        };
 
-    //Thống kê theo năm
-    var chartYear = new CanvasJS.Chart("day-statistics-chart", {
-        exportEnabled: true,
-        animationEnabled: true,
-        title:{
-            text: "Biểu đồ doanh thu theo năm",
-            fontfamily: "tahoma",          
-            fontSize: 25,  
-            padding: 24       
-        }, 
-        axisX: {
-            title: "Loại sản phẩm"
-        },
-        axisY: {
-            title: "Doanh Thu",
-            titleFontColor: "#4F81BC",
-            lineColor: "#4F81BC",
-            labelFontColor: "#4F81BC",
-            tickColor: "#4F81BC",
-            includeZero: true,
-            fontSize: 25
-        },
-        axisY2: {
-            title: "Số sản phẩm bán ra",
-            titleFontColor: "#C0504E",
-            lineColor: "#C0504E",
-            labelFontColor: "#C0504E",
-            tickColor: "#C0504E",
-            includeZero: true,
-            fontSize: 25
-        },
-        toolTip: {
-            shared: true
-        },
-        data: [{
-            type: "column",
-            name: "Doanh thu",
-            showInLegend: true,      
-            yValueFormatString: "#,##0.# VNĐ",
-            dataPoints: [
-                { label: "Điện thoại",  y: 250000000 },
-                { label: "Laptop", y: 500000000 },
-                { label: "Máy tính bảng", y: 750000000 },
-            ]
-        },
-        {
-            type: "column",
-            name: "Số sản phẩm bán ra",
-            axisYType: "secondary",
-            showInLegend: true,
-            yValueFormatString: "#,##0.# Sản phẩm",
-            dataPoints: [
-                { label: "Điện thoại", y: 25 },
-                { label: "Laptop", y: 30 },
-                { label: "Máy tính bảng", y: 35 },
-            ]
-        }]
-    });
-    chartYear.render();
-    
-    }
+        if (x == 'year') {
+            data.date = year.value;
+        } else {
+            data.date = total.value;
+        }
+
+        console.log(data)
+
+        var json = JSON.stringify(data);
+        postData(json);
+
+        
+        $.get("/admin/statistics/chart", function(data) {
+            if(data) {
+                //Thống kê theo năm
+                var chartYear = new CanvasJS.Chart("year-statistics-chart", {
+                        exportEnabled: true,
+                        animationEnabled: true,
+                        title:{
+                            text: "Biểu đồ doanh thu theo năm",
+                            fontfamily: "tahoma",          
+                            fontSize: 25,  
+                            padding: 24       
+                        }, 
+                        axisX: {
+                            title: ""
+                        },
+                        axisY: {
+                            title: "Doanh Thu",
+                            titleFontColor: "#4F81BC",
+                            lineColor: "#4F81BC",
+                            labelFontColor: "#4F81BC",
+                            tickColor: "#4F81BC",
+                            includeZero: true,
+                            fontSize: 25
+                        },
+                        axisY2: {
+                            title: "Số sản phẩm bán ra",
+                            titleFontColor: "#C0504E",
+                            lineColor: "#C0504E",
+                            labelFontColor: "#C0504E",
+                            tickColor: "#C0504E",
+                            includeZero: true,
+                            fontSize: 25
+                        },
+                        toolTip: {
+                            shared: true
+                        },
+                        data: [{
+                            type: "column",
+                            name: "Doanh thu",
+                            showInLegend: true,      
+                            yValueFormatString: "#,##0.# VNĐ",
+                            dataPoints: [
+                                { label: "Tháng 1",  y:  data.T1.price},
+                                { label: "Tháng 2",  y: data.T2.price },
+                                { label: "Tháng 3",  y: data.T3.price },
+                                { label: "Tháng 4",  y: data.T4.price },
+                                { label: "Tháng 5",  y: data.T5.price },
+                                { label: "Tháng 6",  y: data.T6.price },
+                                { label: "Tháng 7",  y: data.T7.price },
+                                { label: "Tháng 8",  y: data.T8.price },
+                                { label: "Tháng 9",  y: data.T9.price },
+                                { label: "Tháng 10",  y: data.T10.price },
+                                { label: "Tháng 11",  y: data.T11.price },
+                                { label: "Tháng 12",  y: data.T12.price }
+                            ]
+                        },
+                        {
+                            type: "column",
+                            name: "Số sản phẩm bán ra",
+                            axisYType: "secondary",
+                            showInLegend: true,
+                            yValueFormatString: "#,##0.# Sản phẩm",
+                            dataPoints: [
+                                { label: "Tháng 1",  y:  data.T1.qty},
+                                { label: "Tháng 2",  y: data.T2.qty },
+                                { label: "Tháng 3",  y: data.T3.qty },
+                                { label: "Tháng 4",  y: data.T4.qty },
+                                { label: "Tháng 5",  y: data.T5.qty },
+                                { label: "Tháng 6",  y: data.T6.qty },
+                                { label: "Tháng 7",  y: data.T7.qty },
+                                { label: "Tháng 8",  y: data.T8.qty },
+                                { label: "Tháng 9",  y: data.T9.qty },
+                                { label: "Tháng 10",  y: data.T10.qty },
+                                { label: "Tháng 11",  y: data.T11.qty },
+                                { label: "Tháng 12",  y: data.T12.qty }
+                            ]
+                        }]
+                    });
+                    chartYear.render();
+            }
+        })
+
+    })
+
+
+
+
     </script>
 </html>

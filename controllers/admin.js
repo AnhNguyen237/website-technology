@@ -213,83 +213,149 @@ exports.postOrderDetail = (req, res, next) => {
 
 // Thống kê doanh số
 exports.getStatistics = (req, res, next) => {
+  Orders.find({})
+    .then(orders => {
+      orders.forEach(order => {
+        console.log(order)
+      })
+    })
   res.render('admin/statistics', {
     user: req.user,
   });
 };
 
-function statisticsType(danhsach, type) {
-  var count = 0;
-  var temp = danhsach.filter((x) => x.item.type === type);
-  for (var j = 0; j < temp.length; j++) {
-    count = temp[j].quantity;
-  }
-  return count;
+var cache;
+
+exports.postStatisticsQuery = (req, res, next) => {
+  cache = req.body;
+  res.redirect('/admin/statistics/chart')
 }
 
-function statisticsAll(all, callback) {
-  var smartphoneCount = 0;
-  var laptopCount = 0;
-  var iPadCount = 0;
+exports.getStatisticsChart = (req, res, next) => {
+  let year ='';
+  let all = false;
+  if(cache.date == 'null') {
+    all = true;
+  } else {
+    year = cache.date;
+  }
+
+  var chartData = {
+    T1: {
+      qty: 0,
+      price: 0
+    },
+    T2: {
+      qty: 0,
+      price: 0
+    },
+    T3: {
+      qty: 0,
+      price: 0
+    },
+    T4: {
+      qty: 0,
+      price: 0
+    },
+    T5: {
+      qty: 0,
+      price: 0
+    },
+    T6: {
+      qty: 0,
+      price: 0
+    },
+    T7: {
+      qty: 0,
+      price: 0
+    },
+    T8: {
+      qty: 0,
+      price: 0
+    },
+    T9: {
+      qty: 0,
+      price: 0
+    },
+    T10: {
+      qty: 0,
+      price: 0
+    },
+    T11: {
+      qty: 0,
+      price: 0
+    },
+    T12: {
+      qty: 0,
+      price: 0
+    }
+  };
 
   Orders.find({})
-    .then(order =>{
+    .then(orders => {
+      orders.forEach(order => {
+        let totalQty = order.cart.totalQty;
+        let totalPrice = order.cart.totalPrice;
+
+
+        let bookDay = (order.date.getDate()).toString();
+        let bookMonth = (order.date.getMonth() + 1).toString();
+        let bookYear = (order.date.getFullYear()).toString();
+
+        if(bookYear == year) {
+          switch(bookMonth) {
+            case '1':
+              chartData.T1.qty += totalQty;
+              chartData.T1.price += totalPrice;
+              break;
+            case '2':
+              chartData.T2.qty += totalQty;
+              chartData.T2.price += totalPrice;
+              break;
+            case '3':
+              chartData.T3.qty += totalQty;
+              chartData.T3.price += totalPrice;
+              break;
+            case '4':
+              chartData.T4.qty += totalQty;
+              chartData.T4.price += totalPrice;
+              break;
+            case '5':
+              chartData.T5.qty += totalQty;
+              chartData.T5.price += totalPrice;
+              break;
+            case '6':
+              chartData.T6.qty += totalQty;
+              chartData.T6.price += totalPrice;
+              break;
+            case '7':
+              chartData.T7.qty += totalQty;
+              chartData.T7.price += totalPrice;
+              break;
+            case '8':
+              chartData.T8.qty += totalQty;
+              chartData.T8.price += totalPrice;
+              break;
+            case '9':
+              chartData.T9.qty += totalQty;
+              chartData.T9.price += totalPrice;
+              break;
+            case '10':
+              chartData.T10.qty += totalQty;
+              chartData.T10.price += totalPrice;
+              break;
+            case '11':
+              chartData.T11.qty += totalQty;
+              chartData.T11.price += totalPrice;
+              break;
+            case '12':
+              chartData.T12.qty += totalQty;
+              chartData.T12.price += totalPrice;
+              break;
+          }
+        }
+      })
+
+      res.send(chartData);
     })
-}
-
-function statisticsDay(day, callback) {
-
-}
-
-function statisticsMonth(month, callback) {
-  
-}
-
-function statisticsYear(year, callback) {
-  
-}
-
-
-exports.postStatisticQuery = (req, res, next) => {
-  var type = req.body.loai;
-  var ngay = req.body.bday;
-  var thang = req.body.bmonth;
-  var nam = req.body.byear;
-  console.log(type + ' ' + ngay + ' ' + thang + ' ' + nam);
-  if (type == 'none') {
-    thongke.TongDoanhThu(function (result) {
-      res.render('manage', {
-        tongdoanhthu: result,
-        user: req.user,
-        body: 'staff/thongke.ejs',
-      });
-    });
-  } else if (type == 'ngay') {
-    thongke.thongKeTheoNgay(ngay, function (result) {
-      console.log(result);
-      res.render('manage', {
-        tongdoanhthu: result,
-        user: req.user,
-        body: 'staff/thongkedoanhso.ejs',
-      });
-    });
-  } else if (type == 'thang') {
-    thongke.thongKeTheoThang(thang, function (result) {
-      console.log(result);
-      res.render('manage', {
-        tongdoanhthu: result,
-        user: req.user,
-        body: 'staff/thongkedoanhso.ejs',
-      });
-    });
-  } else if (type == 'nam') {
-    thongke.thongKeTheoNam(nam, function (result) {
-      console.log(result);
-      res.render('manage', {
-        tongdoanhthu: result,
-        user: req.user,
-        body: 'staff/thongkedoanhso.ejs',
-      });
-    });
-  }
 }
