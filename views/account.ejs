@@ -19,9 +19,8 @@
         <div id='tt-pageContent'>
             <div class='container-indent'>
                 <div class='container container-fluid-custom-mobile-padding'>
-                    <h1 class='tt-title-subpages noborder'>Tài khoản</h1>
+                    <h1 class='tt-title-subpages noborder'>Tài khoản của tôi</h1>
                     <div class='tt-shopping-layout'>
-                        <h2 class='tt-title-border'>Tài khoản của tôi</h2>
                         <div class='tt-wrapper'>
                             <h3 class='tt-title'>Lịch sử đặt hàng</h3>
                             <%if (messageSucc != "undefined") { %>
@@ -70,7 +69,7 @@
                         <div class='tt-wrapper'>
                             <h3 class='tt-title'>Thông tin tài khoản</h3>
                             <div class='tt-table-responsive'>
-                                <table class='tt-table-shop-02'>
+                                <table class='tt-table-shop-02' style="margin-bottom: 32px;">
                                     <tbody>
                                         <tr>
                                             <td>Tên:</td>
@@ -95,9 +94,14 @@
                                     </tbody>
                                 </table>
                             </div>
-                            <a href='/account-change-info' class='btn btn-border'>Thay đổi thông tin</a>
+                            <div class="form-group title-center">
+                                <a href="/account-change-info">
+                                    <button class="btn btn-success" type="submit">
+                                        Chỉnh sửa
+                                    </button>
+                                </a>
+                              </div>
                         </div>
-                        <a href='/change-password' class='btn btn-border'>Đổi mật khẩu</a>
                     </div>
                 </div>
             </div>

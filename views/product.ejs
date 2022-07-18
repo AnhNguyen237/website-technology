@@ -116,8 +116,13 @@
 							<div class="tt-wrapper">
 								<div class="tt-row-custom-01">
 									<div class="col-item">
-										<button class="btn btn-primary btn-lg tt-btn-addtocart thumbprod-button-bg add-cart" data-toggle="modal" data-target="#modalAddToCartProduct<%= prod._id %>" data-id="<%= prod._id %>">
-											<i class="icon-f-39"></i>
+										<button 
+											class="btn btn-primary btn-lg tt-btn-addtocart thumbprod-button-bg add-cart" 
+											data-toggle="modal" data-target="#modalAddToCartProduct<%= prod._id %>" 
+											data-id="<%= prod._id %>" style="display: flex;"
+										
+										>
+											<i class="icon-f-39" style="padding-top: 6px;"></i>
 											Thêm vào giỏ hàng
 										</button>
 										<p class="stock-product">Kho hàng: <%= prod.stock %></p>

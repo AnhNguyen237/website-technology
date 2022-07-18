@@ -252,12 +252,12 @@
               >
               <a href="/shopping_cart" class="btn btn-border">Xem giỏ hàng</a>
               <%if (typeof(user) !== 'undefined' && user.isAuthenticated) { %>
-				<a href="/add-order" class="btn">Chuyển đến thanh toán</a>
+				<a href="/add-order" class="btn btn-border">Chuyển đến thanh toán</a>
 				<% }else if(typeof(user) == 'undefined'){ %>
-					<a href="/login" class="btn">Đăng nhập để thanh toán</a>
+					<a href="/login" class="btn btn-border">Đăng nhập để thanh toán</a>
 					
 					<% }else if(typeof(user) !== 'undefined' && !user.isAuthenticated){ %>
-						<a href="/verify-email" class="btn">Kích hoạt email để thanh toán</a>
+						<a href="/verify-email" class="btn btn-border">Kích hoạt email để thanh toán</a>
 						<% } %>
             </div>
           </div>
