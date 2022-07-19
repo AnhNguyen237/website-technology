@@ -27,9 +27,8 @@
                   <td>
                     <div class="tt-product-img">
                       <img
-                        src="http://bros-admin.herokuapp.com/assets/images/<%= item.images %>"
-                        data-src="http://bros-admin.herokuapp.com/assets/images/<%= item.images %>"
-                        alt=""
+                        src="<%= item.images %>"
+                        data-src="<%= item.images %>"
                       />
                     </div>
                   </td>
@@ -46,7 +45,7 @@
                     <ul class="tt-list-parameters">
                       <li>
                         <div class="tt-price">
-                          $<%= item.price %>
+                          <%= item.price %>₫
                         </div>
                       </li>
                       <li>
@@ -54,14 +53,14 @@
                       </li>
                       <li>
                         <div class="tt-price subtotal">
-                          $<%= item.price %>
+                          <%= item.price %>₫
                         </div>
                       </li>
                     </ul>
                   </td>
                   <td>
                     <div class="tt-price">
-                      $<%= item.item.price %>
+                      <%= item.item.price %>₫
                     </div>
                   </td>
                   <td>
@@ -79,7 +78,7 @@
 
                   <td class="box-pricei<%= item.item._id %>">
                     <div class="tt-price subtotal">
-                      $<%= item.price %>
+                      <%= item.price %>₫
                     </div>
                   </td>
 
@@ -119,13 +118,13 @@
                     <tbody>
                       <tr>
                         <th>Tổng hàng</th>
-                        <td>$<%= session.cart.totalPrice %></td>
+                        <td><%= session.cart.totalPrice %>₫</td>
                       </tr>
                     </tbody>
                     <tfoot>
                       <tr>
                         <th>Tổng tất cả</th>
-                        <td>$<%= session.cart.totalPrice %></td>
+                        <td><%= session.cart.totalPrice %>₫</td>
                       </tr>
                     </tfoot>
                   </table>

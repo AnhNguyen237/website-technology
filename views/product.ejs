@@ -32,7 +32,7 @@
 		<!-- mobile product slider  -->
 		<div class="tt-mobile-product-slider visible-xs arrow-location-center slick-animated-show-js">
 				<% prod.images.forEach(function(image) { %>
-					<div><img src="http://bros-admin.herokuapp.com/assets/images/<%= image %>" alt=""></div>
+					<div><img src="<%= image %>" alt=""></div>
 					<% }); %>
 			<div>
 				<div class="embed-responsive embed-responsive-16by9">
@@ -54,15 +54,15 @@
 						<div class="tt-product-vertical-layout">
 							<div class="tt-product-single-img">
 								<div>
-									<img class="zoom-product" src='http://bros-admin.herokuapp.com/assets/images/<%= prod.images[0] %>' data-zoom-image="http://bros-admin.herokuapp.com/assets/images/<%= prod.images[0] %>" alt="">
+									<img class="zoom-product" src='<%= prod.images[0] %>' data-zoom-image="<%= prod.images[0] %>" alt="">
 									
 								</div>
 							</div>
 							<div class="tt-product-single-carousel-vertical">
 								<ul id="smallGallery" class="tt-slick-button-vertical slick-animated-show-js">
-									<li><a class="zoomGalleryActive" href="/#" data-image="http://bros-admin.herokuapp.com/assets/images/<%= prod.images[0] %>" data-zoom-image="http://bros-admin.herokuapp.com/assets/images/<%= prod.images[0] %>"><img src="http://bros-admin.herokuapp.com/assets/images/<%= prod.images[0] %>" alt=""></a></li>
+									<li><a class="zoomGalleryActive" href="/#" data-image="<%= prod.images[0] %>" data-zoom-image="<%= prod.images[0] %>"><img src="<%= prod.images[0] %>" alt=""></a></li>
 									<% prod.images.forEach(function(image) { %>
-										<li><a href="/#" data-image="http://bros-admin.herokuapp.com/assets/images/<%= image %>" data-zoom-image="http://bros-admin.herokuapp.com/assets/images/<%= image %>"><img src="http://bros-admin.herokuapp.com/assets/images/<%= image %>" alt=""></a></li>
+										<li><a href="/#" data-image="<%= image %>" data-zoom-image="<%= image %>"><img src="<%= image %>" alt=""></a></li>
 									
 									<% }); %>
 									
@@ -93,17 +93,17 @@
 								<a href="#">(<%= allComment %> đánh giá)</a>
 							</div>
 							<div class="tt-price">
-								<span class="new-price"><%= prod.price %>$</span>
-								<span class="old-price"></span>
+								<span class="new-price"><%= prod.newPrice %>₫</span>
+								<span class="old-price"><%= prod.oldPrice %>₫</span>
 							</div>
 							
 							<div class="tt-swatches-container">
 								
 								<div class="tt-wrapper">
-									<div class="tt-title-options">Phân loại:</div>
+									<div class="tt-title-options">Màu:</div>
 									<ul class="tt-options-swatch options-large">
-										<% prod.size.forEach(function(sizee) { %>
-										<li><a href="/#"><%= sizee %></a></li>
+										<% prod.colors.forEach(function(color) { %>
+										<li><a href="/#"><%=color %></a></li>
 										<% }); %>
 									</ul>
 								</div>
@@ -137,7 +137,7 @@
 							
 						</div>
 						<div class="tt-wrapper">
-							<p class="tu-van">Gọi <strong class="high-light-p">1800-6601</strong> để được tư vấn mua hàng (Miễn phí)</p>
+							<p class="tu-van">Gọi <strong class="high-light-p">1900 9090</strong> để được tư vấn mua hàng (Miễn phí)</p>
 						</div>
 					</div>
 				</div>
@@ -145,15 +145,11 @@
 					<div class="col-7 product__interview">
 							<div class="tt-item">
 								<div class="tt-collapse-title">
-									<h4>Thông tin chi tiết <%= prod.name %></h4>
+									<h4>Đặc điểm nổi bật của <%= prod.name %></h4>
 								</div>
 								<div class="tt-collapse-content">
-									<img class="img-description" src="https://fptshop.com.vn/Uploads/images/2015/OPPO-Reno7-Z-5G.jpg">
+									<img class="img-description" src="<%= prod.images[2] %>">
 									<%= prod.description %>
-									OPPO Reno7 Z 5G chinh phục người dùng ngay từ ánh nhìn đầu tiên với thiết kế thời thượng bậc nhất. Bên trong điện thoại còn có nội lực mạnh mẽ từ công nghệ cải tiến, hệ thống camera chân dung tuyệt đỉnh, vi xử lý Snapdragon 695 5G và sạc siêu tốc 33W, giúp bạn sẵn sàng khám phá cuộc sống tràn đầy màu sắc.
-									Chuyên gia nhiếp ảnh chân dung
-
-									Bật mở chân dung vô hạn với Chân dung Bokeh Flare cải tiến, OPPO Reno7 Z 5G mang người dùng vào thế giới ảnh chân dung tuyệt đỉnh. Các thuật toán mạnh mẽ, chạy hàng nghìn phép tính mỗi giây, khả năng xử lý ảnh theo thời gian thực, đạt chuẩn DSLR, tạo nên chủ thể đẹp tự nhiên và khung nền xóa phông lung linh, ngập tràn màu sắc. Tất cả điểm đặc biệt của máy ảnh DSLR đều sẽ được tối ưu trên OPPO Reno7 Z 5G, ảnh chân dung sẽ xuất sắc hơn bao giờ.
 								</div>
 							</div>
 					</div>
@@ -166,53 +162,68 @@
 								<table class="table table-bordered">
 									<tbody>
 										<tr>
-											<td>Màn hình:</td>
-											<td>Chính: 6.43 inch, Chính: AMOLED, FHD+, 1080 x 2400 Pixels</td>
+											<td>Màn hình</td>
+											<td><%= prod.screen %></td>
 										</tr>
+										<% if(prod.camaraRear != '') { %>
+											<tr>
+												<td>Camera sau</td>
+												<td><%= prod.camaraRear %></td>
+											</tr>
+										<%}%>
+			
+										<% if(prod.camaraFront != '') { %>
+											<tr>
+												<td>Camera trước</td>
+												<td><%= prod.camaraFront %></td>
+											</tr>
+										<%}%>
+										<tr>
+											<td>Bộ nhớ trong</td>
+											<td><%= prod.memoryStorage %></td>
+										</tr>
+										<tr>
+											<td>RAM</td>
+											<td><%= prod.ram %></td>
+										</tr>
+										<tr>
+											<td>CPU</td>
+											<td><%= prod.cpu %></td>
+										</tr>
+										<% if(prod.gpu != '') { %>
+											<tr>
+												<td>GPU</td>
+												<td><%= prod.gpu %></td>
+											</tr>
+										<%}%>
+										<% if(prod.batteryCapacity != '') { %>
+											<tr>
+												<td>Dung lượng pin</td>
+												<td><%= prod.batteryCapacity %></td>
+											</tr>
+										<%}%>
+										<% if(prod.sim != '') { %>
+											<tr>
+												<td>Thẻ sim</td>
+												<td><%= prod.sim %></td>
+											</tr>
+										<%}%>
 										
 										<tr>
-											<td>Camera Selfie:</td>
-											<td>64.0 MP + 2.0 MP + 2.0 MP</td>
+											<td>Hệ điều hành</td>
+											<td><%= prod.os %></td>
 										</tr>
 										<tr>
-											<td>RAM:</td>
-											<td>8 GB</td>
+											<td>Trọng lượng</td>
+											<td><%= prod.weight %></td>
 										</tr>
 										<tr>
-											<td>Camera sau:</td>
-											<td>64.0 MP + 2.0 MP + 2.0 MP</td>
+											<td>Xuất xứ</td>
+											<td><%= prod.madein %></td>
 										</tr>
 										<tr>
-											<td>Bộ nhớ trong:</td>
-											<td>128 GB</td>
-										</tr>
-										<tr>
-											<td>RAM:</td>
-											<td>8 GB</td>
-										</tr>
-										<tr>
-											<td>CPU:</td>
-											<td>Snapdragon 695 5G</td>
-										</tr>
-										<tr>
-											<td>Dung lượng pin:</td>
-											<td>4500 mAh</td>
-										</tr>
-										<tr>
-											<td>Thẻ sim:</td>
-											<td>2 - 2 Nano SIM</td>
-										</tr>
-										<tr>
-											<td>Hệ điều hành:</td>
-											<td>Android 11 (ColorOS 12)</td>
-										</tr>
-										<tr>
-											<td>Xuất xứ:</td>
-											<td>Trung Quốc</td>
-										</tr>
-										<tr>
-											<td>Thời gian ra mắt:</td>
-											<td>03/2022</td>
+											<td>Thời gian ra mắt</td>
+											<td><%= prod.releaseTime %></td>
 										</tr>
 									</tbody>
 								</table>
@@ -242,7 +253,7 @@
 									<% comments.forEach(function(cmt){ %>
 									<div class="tt-item">
 										<div class="tt-avatar">
-											<a href="/#"><img src="http://bros-admin.herokuapp.com/assets/images/single/userAvt.png" alt=""></a>
+											<a href="/#"><img src="single/userAvt.png" alt=""></a>
 										</div>
 										<div class="tt-content">
 											<div class="tt-rating">
@@ -452,7 +463,7 @@
                 <div class="tt-img">
                   <img
                     src="/images/loader.svg"
-                    data-src="http://bros-admin.herokuapp.com/assets/images/<%= prod.images[0] %>"
+                    data-src="<%= prod.images[0] %>"
                     alt=""
                   />
                 </div>
@@ -465,7 +476,7 @@
               <div class="tt-product-total">
                 <div class="tt-total">
                   TOTAL:
-                  <span class="tt-price">$<%= prod.price %></span>
+                  <span class="tt-price"><%= prod.price %>₫</span>
                 </div>
               </div>
             </div>
@@ -504,15 +515,12 @@
 								<div class="tt-image-box">
 									
 									<a href="/product/<%= prod._id %>">
-										<span class="tt-img"><img src="http://bros-admin.herokuapp.com/assets/images/<%= prod.images[0] %>" data-src="http://bros-admin.herokuapp.com/assets/images/<%= prod.images[0] %>" alt="" class="loaded" data-was-processed="true"></span>
-										<span class="tt-img-roll-over"><img src="http://bros-admin.herokuapp.com/assets/images/<%= prod.images[1] %>" data-src="http://bros-admin.herokuapp.com/assets/images/<%= prod.images[1] %>" alt="" class="loaded" data-was-processed="true"></span>
+										<span class="tt-img"><img src="<%= prod.images[0] %>" data-src="<%= prod.images[0] %>" alt="" class="loaded" data-was-processed="true"></span>
+										<span class="tt-img-roll-over"><img src="<%= prod.images[1] %>" data-src="<%= prod.images[1] %>" alt="" class="loaded" data-was-processed="true"></span>
 									</a>
 								</div>
 								<div class="tt-description">
 									<div class="tt-row">
-										<ul class="tt-add-info">
-											<li><a href="#"><%= prod.productType.sub %></a></li>
-										</ul>
 										<div class="tt-rating">
 											<i class="icon-star"></i>
 											<i class="icon-star"></i>
@@ -523,7 +531,7 @@
 									</div>
 									<h2 class="tt-title"><a href="product/<%= prod._id %>"><%= prod.name %></a></h2>
 									<div class="tt-price">
-										$<%= prod.price %>
+										<%= prod.price %>₫
 									</div>
 									
 								</div>

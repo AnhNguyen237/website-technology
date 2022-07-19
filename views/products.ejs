@@ -31,160 +31,55 @@
 							</div>
 						</div>
 					</div>
-					<!-- <div class="tt-collapse open ">
-						<h3 class="tt-collapse-title">Sắp xếp theo</h3>
-						<div class="tt-collapse-content">
-							<ul class="tt-filter-list" id="filter-list">
-								<li>
-									<a href="#">Shirts &amp; Tops</a>
-								</li>
-								<li>
-									<a href="#">XS</a>
-								</li>
-								<li>
-									<a href="#">White</a>
-								</li>
-							</ul>
-							<a href="#" class="btn-link-02" onclick="deleteAllFilter()">Xoá tất cả</a>
-						</div>
-					</div> -->
 					<form method="GET">
 					<div class="tt-collapse open">
-						<h3 class="tt-collapse-title">LOẠI SẢN PHẨM</h3>
+						<h3 class="tt-collapse-title">Loại sản phẩm</h3>
 						<div class="tt-collapse-content">
-							
-	
-									<ul class="tt-list-row">
-											<% categories.forEach(function(cat) { %>
-
-												<%if (cat == currentCat) { %>
-													<li class ="active">
-															<a href="/products/<%= cat %>"><%= cat %></a></li>
-													</li>
-														<% categoriesChild.forEach(function(child) { %>
-															<%if (child == currentChild) { %>
-															<li class="active" style="margin-left: 10px;">
-																	<a href="/products/<%= cat %>/<%= child %>"><%= child %></a></li>
-															</li>
-															<% }; %>
-
-															<%if (child != currentChild) { %>
-																<li style="margin-left: 10px;">
-																		<a href="/products/<%= cat %>/<%= child %>"><%= child %></a></li>
-																</li>
-																<% }; %>
-															<% }); %>
-													<% }; %>
-
-													<%if (cat != currentCat) { %>
-														<li>
-																<a href="/products/<%= cat %>"><%= cat %></a></li>
-													</li>
-														<% }; %>
-										
-											<% }); %>
-										</ul>
-								<!-- <li><input type="radio" name="type" value="Áo"> Áo</li>
-								<li><input type="radio" name="type" value="Quần"> Quần</li>
-								<li><input type="radio" name="type" value="Phụ Kiện"> Phụ Kiện</li>
-								<li><input type="radio" name="type" value="Túi xách"> Túi xách</li>
-								<li><input type="radio" name="type" value="Giày"> Giày</li>
-								<li><input type="radio" name="type" value="Mắt Kính"> Mắt Kính</li>
-								<li><input type="radio" name="type" value="Thắt Lưng"> Thắt Lưng</li>
-								<li><input type="radio" name="type" value="Cà Vạt"> Cà Vạt</li>
-								<li><input type="radio" name="type" value="Khăn Choàng"> Khăn Choàng</li>
-								<li><input type="radio" name="type" value="Trang Trí"> Trang Trí</li> -->
-							
+							<ul class="tt-list-row" id="product-type">
+								<li><input type="checkbox" name="type" value="smartphone">Điện thoại</li>
+								<li><input type="checkbox" name="type" value="laptop">Laptop</li>
+								<li><input type="checkbox" name="type" value="iPad">Máy tính bảng</li>
+							</ul>
 						</div>
 					</div>
 					<div class="tt-collapse open">
-						<h3 class="tt-collapse-title">Lọc theo giá</h3>
+						<h3 class="tt-collapse-title">Hãng sản xuất</h3>
+						<div class="tt-collapse-content">
+							<ul class="tt-list-row" id="product-brand">
+								<li><input type="checkbox" name="brand" value="apple">Apple</li>
+								<li><input type="checkbox" name="brand" value="samsung">Sam sung</li>
+								<li><input type="checkbox" name="brand" value="xiaomi">Xiaomi</li>
+								
+							</ul>
+						</div>
+					</div>
+					<div class="tt-collapse open">
+						<h3 class="tt-collapse-title">Mức giá</h3>
 						<div class="tt-collapse-content">
 							<ul class="tt-list-row" id="product-price">
-								<li><input type="radio" name="price" value="50">$0 — $50</li>
-								<li><input type="radio" name="price" value="100">$50 — $100</li>
-								<li><input type="radio" name="price" value="150">$100 — $150</li>
-								<li><input type="radio" name="price" value="200">$150 —  $200</li>
-								<li><input type="radio" name="price" value="1000000">>$200</li>
+								<li><input type="checkbox" name="price" value="1">Dưới 2 triệu </li>
+								<li><input type="checkbox" name="price" value="3">Từ 2 - 5 triệu</li>
+								<li><input type="checkbox" name="price" value="7">Từ 5 - 10 triệu</li>
+								<li><input type="checkbox" name="price" value="15">Từ 10 - 20 triệu</li>
+								<li><input type="checkbox" name="price" value="25">Trên 20 triệu</li>
 							</ul>
 						</div>
 					</div>
 					<div class="tt-collapse open">
-						<h3 class="tt-collapse-title">Lọc theo kích thước</h3>
+						<h3 class="tt-collapse-title">Bộ nhớ trong</h3>
 						<div class="tt-collapse-content">
-							<ul class="tt-list-row" id="product-size">
-								<li><input type="radio" name="size" value="S"> S</li>
-								<li><input type="radio" name="size" value="M"> M</li>
-								<li><input type="radio" name="size" value="L"> L</li>
-								<li><input type="radio" name="size" value="XL"> XL</li>
-							</ul>
-						</div>
-					</div>
-					<!-- <div class="tt-collapse open">
-						<h3 class="tt-collapse-title">Lọc theo màu sắc</h3>
-						<div class="tt-collapse-content">
-							<ul class="tt-options-swatch options-middle">
-								<li><a class="options-color tt-border tt-color-bg-08" href="#"></a></li>
-								<li><a class="options-color tt-color-bg-09" href="#"></a></li>
-								<li class="active"><a class="options-color tt-color-bg-10" href="#"></a></li>
-								<li><a class="options-color tt-color-bg-11" href="#"></a></li>
-								<li><a class="options-color tt-color-bg-12" href="#"></a></li>
-								<li><a class="options-color tt-color-bg-13" href="#"></a></li>
-								<li><a class="options-color tt-color-bg-14" href="#"></a></li>
-								<li><a class="options-color tt-color-bg-15" href="#"></a></li>
-								<li><a class="options-color tt-color-bg-16" href="#"></a></li>
-								<li><a class="options-color tt-color-bg-17" href="#"></a></li>
-								<li><a class="options-color tt-color-bg-18" href="#"></a></li>
-								<li><a class="options-color" href="#">
-									<span class="swatch-img">
-										<img src="/images/custom/texture-img-01.jpg" alt="">
-									</span>
-									<span class="swatch-label color-black"></span>
-								</a></li>
-							</ul>
-						</div>
-					</div> -->
-					<div class="tt-collapse open">
-						<h3 class="tt-collapse-title">Thương hiệu</h3>
-						<div class="tt-collapse-content">
-							<ul class="tt-list-row" id="product-label">
-								<li><input type="radio" name="label" value="shiro"> Shiro</li>
-								<li><input type="radio" name="label" value="crepp"> Crepp</li>
-								<li><input type="radio" name="label" value="mob"> Mob</li>
-								<li><input type="radio" name="label" value="Gucci"> Gucci</li>
+							<ul class="tt-list-row" id="product-memoryStorage">
+								<li><input type="checkbox" name="memoryStorage" value="32 GB">32 GB</li>
+								<li><input type="checkbox" name="memoryStorage" value="64 GB">64 GB</li>
+								<li><input type="checkbox" name="memoryStorage" value="128 GB">128 GB</li>
+								<li><input type="checkbox" name="memoryStorage" value="256 GB">256 GB</li>
+								<li><input type="checkbox" name="memoryStorage" value="512 GB">512 GB</li>
+								<li><input type="checkbox" name="memoryStorage" value=">512 GB">Trên 512 GB</li>
 							</ul>
 						</div>
 					</div>
 					<button type="submit" class="btn btn-border mx-auto mb-5">Lọc</button>
 					</form>
-					
-					<!-- <div class="tt-collapse open">
-						<h3 class="tt-collapse-title">TAGS</h3>
-						<div class="tt-collapse-content">
-							<ul class="tt-list-inline">
-								<li><a href="#">Dresses</a></li>
-								<li><a href="#">Shirts &amp; Tops</a></li>
-								<li><a href="#">Polo Shirts</a></li>
-								<li><a href="#">Sweaters</a></li>
-								<li><a href="#">Blazers</a></li>
-								<li><a href="#">Vests</a></li>
-								<li><a href="#">Jackets</a></li>
-								<li><a href="#">Outerwear</a></li>
-								<li><a href="#">Activewear</a></li>
-								<li><a href="#">Pants</a></li>
-								<li><a href="#">Jumpsuits</a></li>
-								<li><a href="#">Shorts</a></li>
-								<li><a href="#">Jeans</a></li>
-								<li><a href="#">Skirts</a></li>
-								<li><a href="#">Swimwear</a></li>
-							</ul>
-						</div>
-					</div> -->
-					<div class="tt-content-aside">
-						<a href="/products" class="tt-promo-03">
-							<img src="/images/custom/listing_promo_img_07.jpg" alt="">
-						</a>
-					</div>
 				</div>
 				<div class="col-md-12 col-lg-9 col-xl-9">
 					<div class="content-indent container-fluid-custom-mobile-padding-02">
@@ -198,46 +93,11 @@
 							<div class="tt-sort tt-sort-1">
 								<form class="woocommerce-ordering" method="GET" >
 									<select name="orderby" class="orderby" aria-label="Shop order" onchange="this.form.submit()">
-										<option value="" selected disabled hidden><%= sort_value %></option>
 										
 										<option value="1" >Giá thấp tới cao</option>
 										<option value="-1" >Giá cao tới thấp</option>
 									</select>
-									<!-- <input type="hidden" name="paged" value="1"/> -->
 								</form>
-							</div>
-							<div class="tt-sort tt-sort-2">
-							
-								<form method="POST">
-									
-								
-									<select name="numItems" onchange="this.form.submit()" class="form-control">
-										<% if(ITEM_PER_PAGE != 1000){%>
-								
-										<option value="" selected disabled hidden><%= ITEM_PER_PAGE%></option>
-										<% }else{%>
-											<option value="" selected disabled hidden>Tất cả</option>
-										<% } %>
-
-										<option value="8" >8</option>
-								
-												
-										<option value="12" >12</option>
-								
-												
-										<option value="16" >16</option>
-								
-												
-										<option value="32" >32</option>
-								
-												
-										<option value="1000" >Tất cả</option>
-								
-												
-									</select>
-								
-								</form>  
-								
 							</div>
 								
 							
@@ -253,15 +113,12 @@
 											
 											
 											<a href="/product/<%= prod._id %>">
-												<span class="tt-img"><img src="http://bros-admin.herokuapp.com/assets/images/<%= prod.images[0] %>" data-src="http://bros-admin.herokuapp.com/assets/images/<%= prod.images[0] %>" alt="" class="loaded" data-was-processed="true"></span>
-												<span class="tt-img-roll-over"><img src="http://bros-admin.herokuapp.com/assets/images/<%= prod.images[1] %>" data-src="http://bros-admin.herokuapp.com/assets/images/<%= prod.images[1] %>" alt="" class="loaded" data-was-processed="true"></span>
+												<span class="tt-img"><img src="<%= prod.images[0] %>" data-src="<%= prod.images[0] %>" alt="" class="loaded" data-was-processed="true"></span>
+												<span class="tt-img-roll-over"><img src="<%= prod.images[1] %>" data-src="<%= prod.images[1] %>" alt="" class="loaded" data-was-processed="true"></span>
 											</a>
 										</div>
 										<div class="tt-description">
 											<div class="tt-row">
-												<ul class="tt-add-info">
-													<li><a href="#"><%= prod.productType.sub %></a></li>
-												</ul>
 												<div class="tt-rating">
 													<i class="icon-star"></i>
 													<i class="icon-star"></i>
@@ -272,7 +129,7 @@
 											</div>
 											<h2 class="tt-title"><a href="/product/<%= prod._id %>"><%= prod.name %></a></h2>
 											<div class="tt-price">
-												$<%= prod.price %>
+												<%= prod.price %>₫
 											</div>
 											<div class="tt-product-inside-hover" >
 												<div class="tt-row-btn">
@@ -334,7 +191,7 @@
 							<div class="tt-img">
 							  <img
 								src="/images/loader.svg"
-								data-src="http://bros-admin.herokuapp.com/assets/images/<%= prod.images[0] %>"
+								data-src="<%= prod.images[0] %>"
 								alt=""
 							  />
 							</div>
@@ -347,7 +204,7 @@
 						  <div class="tt-product-total">
 							<div class="tt-total">
 							  TOTAL:
-							  <span class="tt-price">$<%= prod.price %></span>
+							  <span class="tt-price"><%= prod.price %>₫</span>
 							</div>
 						  </div>
 						</div>

@@ -29,8 +29,29 @@
                                 <div class='form-default'>
                                     <form method='POST' action='/admin/add-product'>
                                         <div class='form-group'>
+                                            <label for='productName' class='control-label'>Loại sản phẩm *</label>
+                                            <select id="product-type" onchange="myFunction()">
+                                                <option value="smartphone">Điện thoại</option>
+                                                <option value="laptop">Laptop</option>
+                                                <option value="iPad">Máy tính bảng</option>
+                                            </select>
+                                            <input type='text' class='form-control' id='product-type-selected' name='prodType' style="display: none;"/>
+                                        </div>
+                                        <div class='form-group'>
                                             <label for='productName' class='control-label'>Tên sản phẩm *</label>
                                             <input type='text' class='form-control' id='product-name' name='name'/>
+                                        </div>
+                                        <div class='form-group'>
+                                            <label for='productBrand' class='control-label'>Hãng sản xuất *</label>
+                                            <input type='text' class='form-control' id='product-brand' name='brand'/>
+                                        </div>
+                                        <div class='form-group'>
+                                            <label for='product-price' class='control-label'>Giá *</label>
+                                            <input type='number' class='form-control' id='product-price' name='price'/>
+                                        </div>
+                                        <div class='form-group'>
+                                            <label for='product-color' class='control-label'>Màu sắc *</label>
+                                            <input type='text' class='form-control' id='product-color' name='color' placeholder='đỏ, xanh'/>
                                         </div>
                                         <div class='form-group'>
                                             <label for='product-desc' class='control-label'>Mô tả *</label>
@@ -41,20 +62,69 @@
                                             <input type='number' class='form-control' id='product-stock' name='stock'/>
                                         </div>
                                         <div class='form-group'>
-                                            <label for='product-price' class='control-label'>Giá *</label>
-                                            <input type='number' class='form-control' id='product-price' name='price'/>
+                                            <label for='product-add-image' class='control-label'>Hình ảnh *</label>
+                                            <input type='text' class='form-control' id='product-add-image' name='images' placeholder='https://images/smartphone.jpg'/>
                                         </div>
+                                        
                                         <div class='form-group'>
-                                            <label for='product-color' class='control-label'>Màu sắc *</label>
-                                            <input type='text' class='form-control' id='product-color' name='color'/>
-                                        </div>
-                                        <div class='form-group'>
-                                            <label for='product-pattern' class='control-label'>Loại sản phẩm *</label>
-                                            <input type='text' class='form-control' id='product-pattern' name='pattern'/>
-                                        </div>
-                                        <div class='form-group'>
-                                            <label for='product-add-image' class='control-label'>Thêm hình ảnh *</label>
-                                            <input type='text' class='form-control' id='product-add-image' name='add-image' placeholder='https://images/ao-dep.jpg'/>
+                                            <h2>Thông số kỹ thuật</h2>
+                                            <table class="table table-bordered">
+                                                <tbody>
+                                                    <tr>
+                                                        <td>Màn hình:</td>
+                                                        <td><input type='text' class='form-control' name='screen'/></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Camera sau:</td>
+                                                        <td><input type='text' class='form-control' name='camaraRear'/></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Camera trước:</td>
+                                                        <td><input type='text' class='form-control' name='camaraFront'/></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Bộ nhớ trong:</td>
+                                                        <td><input type='text' class='form-control' name='memoryStorage'/></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>RAM:</td>
+                                                        <td><input type='text' class='form-control' name='ram'/></td>
+                                                    </tr>
+                                                    
+                                                    <tr>
+                                                        <td>CPU:</td>
+                                                        <td><input type='text' class='form-control' name='cpu'/></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>GPU:</td>
+                                                        <td><input type='text' class='form-control' name='gpu'/></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Dung lượng pin:</td>
+                                                        <td><input type='text' class='form-control' name='batteryCapacity'/></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Thẻ sim:</td>
+                                                        <td><input type='text' class='form-control' name='sim'/></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Hệ điều hành:</td>
+                                                        <td><input type='text' class='form-control' name='os'/></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Trọng lượng:</td>
+                                                        <td><input type='text' class='form-control' name='weight'/></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Xuất xứ:</td>
+                                                        <td><input type='text' class='form-control' name='madein'/></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Thời gian ra mắt:</td>
+                                                        <td><input type='text' class='form-control' name='releaseTime'/></td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
                                         </div>
 
                                         <div class='row couple-button'>
@@ -101,24 +171,16 @@
     </body>
     <script>
 
-        document.addEventListener('DOMContentLoaded', function () {
-            var productId = document.getElementById('productId').textContent;
-            var imageName;
-            var deleteForm = document.forms['delete-form'];
+        var prodType = document.getElementById("product-type-selected");
+        prodType.value = 'smartphone';
 
-            $('#deleteImage').on('show.bs.modal', function (event) {
-                var button = $(event.relatedTarget);
-                var name = button.data('id');
-                console.log(name);
-                imageName = name;
-            })
-
-            var btnDelete = document.getElementById('btn-delete');
-            btnDelete.onclick = function () {
-                deleteForm.action = '/admin/edit-product/delete-image/' + productId + '?image=' + imageName;
-                deleteForm.submit();
-            }
-        })
+        function myFunction() {
+            var x = document.getElementById("product-type").value;
+            
+            console.log(x);
+            prodType.value = x;
+            console.log(prodType.value);
+        }
     </script>
     <% include ../partials/script %>
 </html>

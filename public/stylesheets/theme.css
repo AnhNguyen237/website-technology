@@ -327,7 +327,8 @@ button::-moz-focus-inner,
 input[type="radio"],
 input[type="checkbox"] {
   box-sizing: border-box;
-  padding: 0; }
+  padding: 0;
+}
 
 input[type="date"],
 input[type="time"],
@@ -10859,7 +10860,7 @@ header {
                   font-weight: 500;
                   color: #191919; }
                   header .tt-search .search-results ul > li a .tt-description .tt-price .new-price {
-                    color: #f8353e;
+                    color: #cb1c22;
                     margin-right: 7px; }
                   header .tt-search .search-results ul > li a .tt-description .tt-price .old-price {
                     color: #191919;
@@ -18613,7 +18614,7 @@ html.ie .tt-btn-col-close {
       margin-top: 3px; }
       .tt-product.tt-view .tt-description .tt-price .new-price,
       .tt-product-design02.tt-view .tt-description .tt-price .new-price {
-        color: #f8353e;
+        color: #cb1c22;
         margin-right: 7px; }
       .tt-product.tt-view .tt-description .tt-price .old-price,
       .tt-product-design02.tt-view .tt-description .tt-price .old-price {
@@ -19157,7 +19158,7 @@ html.ie .tt-btn-col-close {
         font-family: 'Roboto', sans-serif;
         color: #191919; }
         .tt-product:not(.tt-view) .tt-description .tt-price .new-price {
-          color: #f8353e;
+          color: #cb1c22;
           margin-right: 7px; }
         .tt-product:not(.tt-view) .tt-description .tt-price .old-price {
           color: #191919;
@@ -19548,7 +19549,7 @@ html.ie .tt-btn-col-close {
         font-weight: 500;
         color: #191919; }
         .tt-product-design02:not(.tt-view) .tt-description .tt-price .new-price {
-          color: #f8353e;
+          color: #cb1c22;
           margin-right: 7px; }
         .tt-product-design02:not(.tt-view) .tt-description .tt-price .old-price {
           color: #191919;
@@ -20019,7 +20020,7 @@ html.ie .tt-btn-col-close {
       color: #191919; }
       .tt-product:not(.tt-view) .tt-description .tt-price .new-price,
       .tt-product-design02:not(.tt-view) .tt-description .tt-price .new-price {
-        color: #f8353e;
+        color: #cb1c22;
         margin-right: 7px; }
       .tt-product:not(.tt-view) .tt-description .tt-price .old-price,
       .tt-product-design02:not(.tt-view) .tt-description .tt-price .old-price {
@@ -22328,7 +22329,7 @@ body:not(.touch-device) .tt-hotspot .tt-btn:hover:after {
       font-size: 16px;
       padding-right: 12px; }
       .tt-hotspot-content .tt-description .tt-price .new-price {
-        color: #f8353e;
+        color: #cb1c22;
         margin-right: 7px; }
       .tt-hotspot-content .tt-description .tt-price .old-price {
         color: #191919;
@@ -24464,7 +24465,7 @@ html.ie #tt-boxedbutton .rtlbutton-color:hover .box-description {
       font-family: 'Roboto', sans-serif;
       color: #191919; }
       .tt-wishlist-box .tt-wishlist-list .tt-item .tt-col-description .tt-description .tt-price .new-price {
-        color: #f8353e;
+        color: #cb1c22;
         margin-right: 7px; }
       .tt-wishlist-box .tt-wishlist-list .tt-item .tt-col-description .tt-description .tt-price .old-price {
         color: #191919;
@@ -24723,7 +24724,7 @@ html.ie #tt-boxedbutton .rtlbutton-color:hover .box-description {
       font-family: 'Roboto', sans-serif;
       color: #191919; }
       .tt-compare-table .tt-item .tt-image-box .tt-price .new-price {
-        color: #f8353e;
+        color: #cb1c22;
         margin-right: 7px; }
       .tt-compare-table .tt-item .tt-image-box .tt-price .old-price {
         color: #191919;
@@ -24983,7 +24984,7 @@ html.ie #tt-boxedbutton .rtlbutton-color:hover .box-description {
       font-family: 'Roboto', sans-serif;
       color: #191919; }
       .tt-compare-table02 .tt-col-item .tt-image-box .tt-price .new-price {
-        color: #f8353e;
+        color: #cb1c22;
         margin-right: 7px; }
       .tt-compare-table02 .tt-col-item .tt-image-box .tt-price .old-price {
         color: #191919;
@@ -28832,7 +28833,7 @@ body:not(.touch-device) .arrow-location-center-02.tt-arrow-hover:hover .slick-ar
     font-weight: 500;
     color: #191919; }
     .tt-layout-vertical .tt-description .tt-price .new-price {
-      color: #f8353e;
+      color: #cb1c22;
       margin-right: 7px; }
     .tt-layout-vertical .tt-description .tt-price .old-price {
       color: #191919;
@@ -31102,4 +31103,19 @@ html:not(.mac):not(.touch-device) .tt-carousel-brands .slick-track {
   border-radius: 4px;
   background-color: #f8f9fa;
   border: solid 1px #e9ecef;
+}
+
+.tt-price {
+  color: #cb1c22!important;
+  font-weight: 600!important;
+}
+
+.new-price {
+  color: #cb1c22!important;
+  font-size: 32px;
+}
+
+.old-price {
+  color: #99a2aa!important;
+  font-size: 20px;
 }

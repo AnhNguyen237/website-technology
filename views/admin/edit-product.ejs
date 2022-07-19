@@ -14,7 +14,7 @@
                     <li>
                         <a href='/admin/manage-products'>Quản lý sản phẩm</a>
                     </li>
-                    <li>Thông tin tài khoản</li>
+                    <li>Thông tin sản phẩm</li>
                 </ul>
             </div>
         </div>
@@ -31,41 +31,102 @@
                                         <div id='productId' style='display: none;'><%=product._id%></div>
                                         <div class='form-group'>
                                             <label for='productName' class='control-label'>Tên sản phẩm *</label>
-                                            <input type='text' class='form-control' id='product-name' name='name' value="<%= product.name %>"/>
+                                            <input type='text' class='form-control' id='product-name' name='name' value="<%=product.name%>"/>
                                         </div>
                                         <div class='form-group'>
-                                            <label for='product-desc' class='control-label'>Mô tả *</label>
-                                            <input type='text' class='form-control' id='product-desc' name='description' value="<%= product.description %>"/>
-                                        </div>
-                                        <div class='form-group'>
-                                            <label for='product-stock' class='control-label'>Số lượng *</label>
-                                            <input type='number' class='form-control' id='product-stock' name='stock' value="<%= product.stock %>"/>
+                                            <label for='productBrand' class='control-label'>Hãng sản xuất *</label>
+                                            <input type='text' class='form-control' id='product-brand' name='brand' value="<%=product.brand%>"/>
                                         </div>
                                         <div class='form-group'>
                                             <label for='product-price' class='control-label'>Giá *</label>
-                                            <input type='number' class='form-control' id='product-price' name='price' value="<%= product.price %>"/>
+                                            <input type='number' class='form-control' id='product-price' name='price' value="<%=product.price%>"/>
                                         </div>
                                         <div class='form-group'>
                                             <label for='product-color' class='control-label'>Màu sắc *</label>
-                                            <input type='text' class='form-control' id='product-color' name='color' value="<%= product.color %>"/>
+                                            <input type='text' class='form-control' id='product-color' name='color' value="<%=product.colors.toString()%>"/>
                                         </div>
                                         <div class='form-group'>
-                                            <label for='product-pattern' class='control-label'>Loại sản phẩm *</label>
-                                            <input type='text' class='form-control' id='product-pattern' name='pattern' value="<%= product.pattern %>"/>
+                                            <label for='product-desc' class='control-label'>Mô tả *</label>
+                                            <input type='text' class='form-control' id='product-desc' name='description' value="<%=product.description%>"/>
+                                        </div>
+                                        <div class='form-group'>
+                                            <label for='product-stock' class='control-label'>Số lượng *</label>
+                                            <input type='number' class='form-control' id='product-stock' name='stock' value="<%=product.stock%>"/>
                                         </div>
                                         <div class='form-group'>
                                             <label for='product-images' class='control-label'>Hình ảnh</label>
                                             <ul style='display: flex;'>
                                                 <% product.images.forEach((img, index, arr) => { %>
                                                     <li>
-                                                        <img class='admin-product-img' src='/images/product/<%=img%>' alt="<%=img%>" data-id="<%=img%>" data-bs-toggle='modal' data-bs-target='#deleteImage'/>
+                                                        <img class='admin-product-img' src='<%=img%>' alt="<%=img%>" data-id="<%=img%>" data-bs-toggle='modal' data-bs-target='#deleteImage'/>
                                                     </li>
                                                 <% }) %>
                                             </ul>
                                         </div>
                                         <div class='form-group'>
                                             <label for='product-add-image' class='control-label'>Thêm hình ảnh *</label>
-                                            <input type='text' class='form-control' id='product-add-image' name='add-image' placeholder='https://images/ao-dep.jpg'/>
+                                            <input type='text' class='form-control' id='product-add-image' name='image' placeholder='https://images/ao-dep.jpg'/>
+                                        </div>
+
+                                        <div class='form-group'>
+                                            <h2>Thông số kỹ thuật</h2>
+                                            <table class="table table-bordered">
+                                                <tbody>
+                                                    <tr>
+                                                        <td>Màn hình:</td>
+                                                        <td><input type='text' class='form-control' name='screen' value="<%=product.screen%>"/></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Camera sau:</td>
+                                                        <td><input type='text' class='form-control' name='camaraRear' value="<%=product.camaraRear%>"/></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Camera trước:</td>
+                                                        <td><input type='text' class='form-control' name='camaraFront' value="<%=product.camaraFront%>"/></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Bộ nhớ trong:</td>
+                                                        <td><input type='text' class='form-control' name='memoryStorage' value="<%=product.memoryStorage%>"/></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>RAM:</td>
+                                                        <td><input type='text' class='form-control' name='ram' value="<%=product.ram%>"/></td>
+                                                    </tr>
+                                                    
+                                                    <tr>
+                                                        <td>CPU:</td>
+                                                        <td><input type='text' class='form-control' name='cpu' value="<%=product.cpu%>"/></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>GPU:</td>
+                                                        <td><input type='text' class='form-control' name='gpu' value="<%=product.gpu%>"/></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Dung lượng pin:</td>
+                                                        <td><input type='text' class='form-control' name='batteryCapacity' value="<%=product.batteryCapacity%>"/></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Thẻ sim:</td>
+                                                        <td><input type='text' class='form-control' name='sim' value="<%=product.sim%>"/></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Hệ điều hành:</td>
+                                                        <td><input type='text' class='form-control' name='os' value="<%=product.os%>"/></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Trọng lượng:</td>
+                                                        <td><input type='text' class='form-control' name='weight' value="<%=product.weight%>"/></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Xuất xứ:</td>
+                                                        <td><input type='text' class='form-control' name='madein' value="<%=product.madein%>"/></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Thời gian ra mắt:</td>
+                                                        <td><input type='text' class='form-control' name='releaseTime' value="<%=product.releaseTime%>"/></td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
                                         </div>
 
                                         <div class='row couple-button'>

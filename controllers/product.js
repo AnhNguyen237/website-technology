@@ -28,6 +28,7 @@ exports.getIndexProducts = (req, res, next) => {
   Products.find()
     .limit(8)
     .then(products => {
+      
       Products.find()
         .limit(8)
         .sort("buyCounts")
@@ -56,7 +57,11 @@ exports.getProduct = (req, res, next) => {
   }
   const prodId = req.params.productId;
   Products.findOne({ _id: `${prodId}` }).then(product => {
-    Products.find({ "productType.main": product.productType.main }).then(
+    product.oldPrice = Math.round(product.price*1.1);
+    product.oldPrice = product.oldPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.');
+    product.newPrice = Math.round(product.price);
+    product.newPrice = product.newPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.');
+    Products.find({ _id: {$ne: prodId}, brand: product.brand }).then(
       relatedProducts => {
         res.render("product", {
           title: `${product.name}`,
@@ -84,13 +89,6 @@ exports.getProducts = (req, res, next) => {
   let productType = req.params.productType;
   let productChild = req.params.productChild;
 
-  ptype = req.query.type !== undefined ? req.query.type : ptype;
-  ptypesub = req.query.type !== undefined ? req.query.type : ptypesub;
-  pprice = req.query.price !== undefined ? req.query.price : 999999;
-  psize = req.query.size !== undefined ? req.query.size : psize;
-  plabel = req.query.label !== undefined ? req.query.label : plabel;
-  plowerprice = pprice !== 999999 ? pprice - 50 : 0;
-  plowerprice = pprice == 1000000 ? 200 : plowerprice;
   SORT_ITEM = req.query.orderby;
 
   if (SORT_ITEM == -1) {
@@ -100,13 +98,6 @@ exports.getProducts = (req, res, next) => {
   if (SORT_ITEM == 1) {
     sort_value = "Giá thấp tới cao";
     price = "1";
-  }
-
-  if (Object.entries(req.query).length == 0) {
-    ptype = "";
-    psize = "";
-    plabel = "";
-    ptypesub = "";
   }
 
   var page = +req.query.page || 1;
@@ -136,23 +127,11 @@ exports.getProducts = (req, res, next) => {
     productChild = "";
   }
 
-  Products.find({
-    "productType.main": new RegExp(productType, "i"),
-    "productType.sub": new RegExp(productChild, "i"),
-    size: new RegExp(psize, "i"),
-    price: { $gt: plowerprice, $lt: pprice },
-    labels: new RegExp(plabel, "i")
-  })
+  Products.find({})
     .countDocuments()
     .then(numProduct => {
       totalItems = numProduct;
-      return Products.find({
-        "productType.main": new RegExp(productType, "i"),
-        "productType.sub": new RegExp(productChild, "i"),
-        size: new RegExp(psize, "i"),
-        price: { $gt: plowerprice, $lt: pprice },
-        labels: new RegExp(plabel, "i")
-      })
+      return Products.find({})
         .skip((page - 1) * ITEM_PER_PAGE)
         .limit(ITEM_PER_PAGE)
         .sort({

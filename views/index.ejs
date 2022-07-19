@@ -148,15 +148,12 @@
 							<div class="tt-image-box">
 								
 								<a href="/product/<%= prod._id %>">
-									<span class="tt-img"><img src="http://bros-admin.herokuapp.com/assets/images/<%= prod.images[0] %>" data-src="http://bros-admin.herokuapp.com/assets/images/<%= prod.images[0] %>" alt="" class="loaded" data-was-processed="true"></span>
-									<span class="tt-img-roll-over"><img src="http://bros-admin.herokuapp.com/assets/images/<%= prod.images[1] %>" data-src="http://bros-admin.herokuapp.com/assets/images/<%= prod.images[1] %>" alt="" class="loaded" data-was-processed="true"></span>
+									<span class="tt-img"><img src="<%= prod.images[0] %>" data-src="<%= prod.images[0] %>" alt="" class="loaded" data-was-processed="true"></span>
+									<span class="tt-img-roll-over"><img src="<%= prod.images[1] %>" data-src="<%= prod.images[1] %>" alt="" class="loaded" data-was-processed="true"></span>
 								</a>
 							</div>
 							<div class="tt-description">
 								<div class="tt-row">
-									<ul class="tt-add-info">
-										<li><a href="#"><%= prod.productType.sub %></a></li>
-									</ul>
 									<div class="tt-rating">
 										<i class="icon-star"></i>
 										<i class="icon-star"></i>
@@ -167,7 +164,7 @@
 								</div>
 								<h2 class="tt-title"><a href="product/<%= prod._id %>"><%= prod.name %></a></h2>
 								<div class="tt-price">
-									$<%= prod.price %>
+									<%= prod.price %>₫
 								</div>
 								<div class="tt-product-inside-hover" >
 									<div class="tt-row-btn">
@@ -227,7 +224,7 @@
                 <div class="tt-img">
                   <img
                     src="/images/loader.svg"
-                    data-src="http://bros-admin.herokuapp.com/assets/images/<%= prod.images[0] %>"
+                    data-src="<%= prod.images[0] %>"
                     alt=""
                   />
                 </div>
@@ -240,7 +237,7 @@
               <div class="tt-product-total">
                 <div class="tt-total">
                   TOTAL:
-                  <span class="tt-price">$<%= prod.price %></span>
+                  <span class="tt-price"><%= prod.price %>₫</span>
                 </div>
               </div>
             </div>
@@ -329,15 +326,12 @@
 							<div class="tt-image-box">
 								
 								<a href="/product/<%= prod._id %>">
-									<span class="tt-img"><img src="http://bros-admin.herokuapp.com/assets/images/<%= prod.images[0] %>" data-src="http://bros-admin.herokuapp.com/assets/images/<%= prod.images[0] %>" alt="" class="loaded" data-was-processed="true"></span>
-									<span class="tt-img-roll-over"><img src="http://bros-admin.herokuapp.com/assets/images/<%= prod.images[1] %>" data-src="http://bros-admin.herokuapp.com/assets/images/<%= prod.images[1] %>" alt="" class="loaded" data-was-processed="true"></span>
+									<span class="tt-img"><img src="<%= prod.images[0] %>" data-src="<%= prod.images[0] %>" alt="" class="loaded" data-was-processed="true"></span>
+									<span class="tt-img-roll-over"><img src="<%= prod.images[1] %>" data-src="<%= prod.images[1] %>" alt="" class="loaded" data-was-processed="true"></span>
 								</a>
 							</div>
 							<div class="tt-description">
 								<div class="tt-row">
-									<ul class="tt-add-info">
-										<li><a href="#"><%= prod.productType.sub %></a></li>
-									</ul>
 									<div class="tt-rating">
 										<i class="icon-star"></i>
 										<i class="icon-star"></i>
@@ -348,7 +342,7 @@
 								</div>
 								<h2 class="tt-title"><a href="product/<%= prod._id %>"><%= prod.name %></a></h2>
 								<div class="tt-price">
-									$<%= prod.price %>
+									<%= prod.price %>₫
 								</div>
 								<div class="tt-product-inside-hover" >
 									<div class="tt-row-btn">
@@ -408,7 +402,7 @@
                 <div class="tt-img">
                   <img
                     src="/images/loader.svg"
-                    data-src="http://bros-admin.herokuapp.com/assets/images/<%= prod.images[0] %>"
+                    data-src="<%= prod.images[0] %>"
                     alt=""
                   />
                 </div>
@@ -421,7 +415,7 @@
               <div class="tt-product-total">
                 <div class="tt-total">
                   TOTAL:
-                  <span class="tt-price">$<%= prod.price %></span>
+                  <span class="tt-price"><%= prod.price %>₫</span>
                 </div>
               </div>
             </div>
@@ -564,7 +558,7 @@
 						</div>
 						<div class="tt-col-description">
 							<h4 class="tt-title">Vận chuyển miễn phí</h4>
-							<p>Vận chuyển miễn phí vơí mọi đơn hàng trên 100$</p>
+							<p>Miễn phí vận chuyển toàn quốc</p>
 						</div>
 					</a>
 				</div>
@@ -575,7 +569,7 @@
 						</div>
 						<div class="tt-col-description">
 							<h4 class="tt-title">Hỗ trợ 24/7</h4>
-							<p>Liên lạc 24/7 Liên lạc 24/7 Liên lạc 24/7</p>
+							<p>Tổng đài làm việc 24/7</p>
 						</div>
 					</a>
 				</div>

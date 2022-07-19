@@ -133,9 +133,23 @@ exports.getEditProduct = (req, res, next) => {
 exports.postEditProduct = (req, res, next) => {
   let productId = req.params.productId;
 
-  Products.findByIdAndUpdate(productId, req.body)
-    .then(() => res.redirect('/admin/manage-products'))
-    .catch(next);
+  var updateProduct = req.body;
+
+  Products.findById(productId)
+    .then(product => {
+      updateProduct.images = product.images;
+      productColor = updateProduct.color.replace(/\s+/g, '');
+      updateProduct.colors = productColor.split(',');
+      return updateProduct
+    })
+    .then((updateProduct) => {
+      if(req.body.image != '') {
+        updateProduct.images.push(req.body.image);
+      }
+      Products.findByIdAndUpdate(productId, updateProduct)
+        .then(() => res.redirect('/admin/manage-products'))
+        .catch(next);
+    })
 };
 
 exports.postDeleteImage = (req, res, next) => {
@@ -152,7 +166,15 @@ exports.getAddProduct = (req, res, next) => {
   });
 };
 
-exports.postAddProduct = (req, res, next) => {};
+exports.postAddProduct = (req, res, next) => {
+  var productItem = req.body;
+  productItem.images = [req.body.images];
+  productColor = productItem.color.replace(/\s+/g, '');
+  productItem.colors = productColor.split(',');
+  console.log(productItem);
+  new Products(productItem).save();
+  res.redirect('/admin/manage-products');
+};
 
 //Quản lý đơn hàng
 exports.getManageOrders = (req, res, next) => {

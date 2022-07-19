@@ -12,6 +12,71 @@ const productSchema = new Schema({
     type: String,
     required: true
   },
+  brand: {
+    type: String,
+    required: true
+  },
+  price: {
+    type: Number,
+    required: true
+  },
+  colors: {
+    type: [String],
+    required: true,
+    default: "Trắng"
+  },
+  screen: {
+    type: String,
+    required: true
+  },
+  camaraRear: {
+    type: String,
+    required: false
+  },
+  camaraFront: {
+    type: String,
+    required: false
+  },
+  memoryStorage: {
+    type: String,
+    required: false
+  },
+  ram: {
+    type: String,
+    required: false
+  },
+  cpu: {
+    type: String,
+    required: false
+  },
+  gpu: {
+    type: String,
+    required: false
+  },
+  batteryCapacity: {
+    type: String,
+    required: false
+  },
+  sim: {
+    type: String,
+    required: false
+  },
+  os: {
+    type: String,
+    required: false
+  },
+  weight: {
+    type: String,
+    required: false
+  },
+  madein: {
+    type: String,
+    required: false
+  },
+  releaseTime: {
+    type: String,
+    required: false
+  },
   description: {
     type: String,
     required: false,
@@ -21,30 +86,6 @@ const productSchema = new Schema({
     type: Number,
     required: true
   },
-  price: {
-    type: Number,
-    required: true
-  },
-  size: {
-    type: [String],
-    required: true
-  },
-  productType: {
-    main: [String],
-    sub: [String]
-  },
-  color: {
-    type: [String],
-    required: true
-  },
-  pattern: {
-    type: [String],
-    required: false
-  },
-  tags: {
-    type: [String],
-    required: false
-  },
   images: {
     type: [String],
     required: true
@@ -53,10 +94,6 @@ const productSchema = new Schema({
     type: Date,
     required: false,
     default: Date.now
-  },
-  materials: {
-    type: [String],
-    required: true
   },
   buyCounts: {
     type: Number,
