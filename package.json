@@ -20,6 +20,7 @@
     "ejs": "~2.6.1",
     "express": "^4.18.1",
     "express-session": "^1.17.0",
+    "google-auth-library": "^8.1.1",
     "http-errors": "~1.6.3",
     "jquery": "^3.4.1",
     "mongodb": "^4.7.0",

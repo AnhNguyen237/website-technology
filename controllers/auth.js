@@ -1,9 +1,18 @@
 const passport = require("passport");
 const Cart = require("../models/cart");
 const nodemailer = require("nodemailer");
+const {OAuth2Client} = require("google-auth-library");
 const Users = require("../models/user");
+const key = require("../key");
 var bcrypt = require("bcryptjs");
 var randomstring = require("randomstring");
+const GOOGLE_MAILER_CLIENT_ID = key.ClientID;
+const GOOGLE_MAILER_CLIENT_SECRET = key.ClientSecret;
+const GOOGLE_MAILER_REFRESH_TOKEN = key.RefreshToken;
+const ADMIN_EMAIL_ADDRESS = key.EmailAddress;
+const myOAuth2Client = new OAuth2Client(GOOGLE_MAILER_CLIENT_ID, GOOGLE_MAILER_CLIENT_SECRET)
+
+myOAuth2Client.setCredentials({refresh_token: GOOGLE_MAILER_REFRESH_TOKEN})
 
 exports.getLogin = (req, res, next) => {
   var cartProduct;
@@ -71,65 +80,64 @@ exports.postSignUp = (req, res, next) => {
   })(req, res, next);
 };
 
-exports.getVerifyEmail = (req, res, next) => {
-  var transporter = nodemailer.createTransport({
-    service: "Gmail",
-    auth: {
-      user: "nocodenolife2527@gmail.com",
-      pass: "password2527@"
-    }
-  });
-  Users.findOne({ username: req.user.username }).then(user => {
-    var verification_token = randomstring.generate({
-      length: 10
-    });
-    var mainOptions = {
-      from: "Crepp so gud",
-      to: req.user.email,
-      subject: "Test",
-      text: "text ne",
-      html:
-        "<p>Cảm ơn đã đăng kí tài khoản của Bros shop. Mã kích hoạt của bạn là:</p>" +
-        verification_token
-    };
-    transporter.sendMail(mainOptions, (err, info) => {
-      if (err) {
-        console.log(err);
-      } else {
-        console.log("Sent:" + info.response);
-      }
-    });
-    user.verify_token = verification_token;
-    user.save();
-  });
+exports.getVerifyEmail = async (req, res, next) => {
+  try {
+      const myAccessTokenObject = myOAuth2Client.getAccessToken()
+
+      const myAccesstToken = myAccessTokenObject ?. token
+
+      var transporter = nodemailer.createTransport({
+          service: 'gmail',
+          auth: {
+              type: 'OAuth2',
+              user: ADMIN_EMAIL_ADDRESS,
+              clientId: GOOGLE_MAILER_CLIENT_ID,
+              clientSecret: GOOGLE_MAILER_CLIENT_SECRET,
+              refreshToken: GOOGLE_MAILER_REFRESH_TOKEN,
+              accessToken: myAccesstToken
+          }
+      });
+      var verification_token = randomstring.generate({length: 10});
+
+      Users.findOne({username: req.user.username}).then(user => {
+          let mainOptions = {
+              from: "Trùm Công Nghệ",
+              to: req.user.email,
+              subject: "Gửi mã xác thực",
+              html: "<p>Mã xác thực của bạn là: </p>" + verification_token
+          };
+          transporter.sendMail(mainOptions);
+
+          user.verify_token = verification_token;
+          user.save();
+      });
+  } catch (error) {
+      console.log(error)
+      res.status(500).json({errors: error.message})
+  }
+
 
   const message = req.flash("error")[0];
-  var cartProduct;
-  if (!req.session.cart) {
-    cartProduct = null;
-  } else {
-    var cart = new Cart(req.session.cart);
-    cartProduct = cart.generateArray();
-  }
   res.render("verify-email", {
-    title: "Xác thực email",
-    message: `${message}`,
-    user: req.user,
-    cartProduct: cartProduct
+      title: "Xác thực email",
+      message: `${message}`,
+      user: req.user
   });
 };
 
 exports.postVerifyEmail = (req, res, next) => {
   const token = req.body.token;
-  Users.findOne({ username: req.user.username }, (err, user) => {
-    if (token == user.verify_token) {
-      user.isAuthenticated = true;
-      user.save();
-      return res.redirect("/login");
-    } else if (token != user.verify_token) {
-      req.flash("error", "Mã xác thực không hợp lệ");
-      return res.redirect("/verify-email");
-    }
+  Users.findOne({
+      username: req.user.username
+  }, (err, user) => {
+      if (token == user.verify_token) {
+          user.isAuthenticated = true;
+          user.save();
+          return res.redirect("/login");
+      } else if (token != user.verify_token) {
+          req.flash("error", "Mã xác thực không hợp lệ!");
+          return res.redirect("/verify-email");
+      }
   });
 };
 
@@ -150,45 +158,50 @@ exports.getForgotPass = (req, res, next) => {
   });
 };
 
-exports.postForgotPass = (req, res, next) => {
-  const email = req.body.email;
-  Users.findOne({ email: email }, (err, user) => {
-    if (!user) {
-      req.flash("error", "Email không hợp lệ");
-      return res.redirect("/forgot-password");
-    } else {
-      var transporter = nodemailer.createTransport({
-        service: "Gmail",
-        auth: {
-          user: "nocodenolife2527@gmail.com",
-          pass: "password2527@"
-        }
-      });
-      var tpass = randomstring.generate({
-        length: 6
-      });
-      var mainOptions = {
-        from: "Crepp so gud",
-        to: email,
-        subject: "Test",
-        text: "text ne",
-        html: "<p>Mật khẩu mới của bạn là:</p>" + tpass
-      };
-      transporter.sendMail(mainOptions, (err, info) => {
-        if (err) {
-          console.log(err);
-        } else {
-          console.log("Sent:" + info.response);
-        }
-      });
-      bcrypt.hash(tpass, 12).then(hashPassword => {
-        user.password = hashPassword;
-        user.save();
-      });
+exports.postForgotPass = async (req, res, next) => {
+  try {
+    const email = req.body.email;
+    Users.findOne({ email: email }, (err, user) => {
+      if (!user) {
+        req.flash("error", "Email không hợp lệ");
+        return res.redirect("/forgot-password");
+      } else {
+        const myAccessTokenObject = myOAuth2Client.getAccessToken()
 
-      res.redirect("/login");
-    }
-  });
+        const myAccesstToken = myAccessTokenObject ?. token
+
+        var transporter = nodemailer.createTransport({
+            service: 'gmail',
+            auth: {
+                type: 'OAuth2',
+                user: ADMIN_EMAIL_ADDRESS,
+                clientId: GOOGLE_MAILER_CLIENT_ID,
+                clientSecret: GOOGLE_MAILER_CLIENT_SECRET,
+                refreshToken: GOOGLE_MAILER_REFRESH_TOKEN,
+                accessToken: myAccesstToken
+            }
+        });
+        var tpass = randomstring.generate({
+          length: 6
+        });
+        let mainOptions = {
+          from: "Trùm Công Nghệ",
+          to: email,
+          subject: "Quên mật khẩu",
+          html: "<p>Mật khẩu mới của bạn là: </p>" + tpass
+        };
+        transporter.sendMail(mainOptions)
+        bcrypt.hash(tpass, 12).then(hashPassword => {
+          user.password = hashPassword;
+          user.save();
+        });
+
+        res.redirect("/login");
+      }
+    });
+  }catch (error) {
+    res.redirect("/forgot-password");
+}
 };
 
 exports.getChangePassword = (req, res, next) => {

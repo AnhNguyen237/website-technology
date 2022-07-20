@@ -39,8 +39,8 @@
                       >
                     </h2>
                     <ul class="tt-list-description">
-                      <li>Cỡ: 22</li>
-                      <li>Màu: Green</li>
+                      <li>Hãng: <%=item.item.brand%></li>
+                      <li>Bộ nhớ trong: <%=item.item.memoryStorage%></li>
                     </ul>
                     <ul class="tt-list-parameters">
                       <li>
@@ -118,13 +118,13 @@
                     <tbody>
                       <tr>
                         <th>Tổng hàng</th>
-                        <td><%= session.cart.totalPrice %>₫</td>
+                        <td class="tt-price"><%= session.cart.totalPrice %>₫</td>
                       </tr>
                     </tbody>
                     <tfoot>
                       <tr>
                         <th>Tổng tất cả</th>
-                        <td><%= session.cart.totalPrice %>₫</td>
+                        <td class="tt-price"><%= session.cart.totalPrice %>₫</td>
                       </tr>
                     </tfoot>
                   </table>
@@ -167,4 +167,21 @@
     partials/modal-quickviewmodal %> <% include partials/modal-videoproduct %>
     <% include partials/modal-subscribegood %> <% include partials/script %>
   </body>
+  <script>
+    $(document).ready(function() {
+      var priceElement = document.querySelectorAll('.tt-price');
+      priceElement.forEach( price => {
+        var format = price.textContent.replace(/\B(?=(\d{3})+(?!\d))/g, '.');
+        price.innerHTML = format;
+      })
+
+      $('.plus-btn').click(function() {
+       
+        priceElement.forEach( price => {
+          console.log(price.textContent)
+          price.innerHTML = price.textContent;
+        })
+      })
+    })
+  </script>
 </html>

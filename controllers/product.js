@@ -6,13 +6,9 @@ const Order = require("../models/order");
 
 var ITEM_PER_PAGE = 12;
 var SORT_ITEM;
+var brandSearch;
+var prodType;
 var sort_value = "Giá thấp tới cao";
-var ptype;
-var ptypesub;
-var pprice = 999999;
-var psize;
-var plabel;
-var plowerprice;
 var price;
 var searchText;
 
@@ -86,10 +82,12 @@ exports.getProducts = (req, res, next) => {
     var cart = new Cart(req.session.cart);
     cartProduct = cart.generateArray();
   }
-  let productType = req.params.productType;
-  let productChild = req.params.productChild;
 
   SORT_ITEM = req.query.orderby;
+
+  brandSearch = req.query.brandof;
+  prodType = req.query.prodType;
+  console.log(prodType)
 
   if (SORT_ITEM == -1) {
     sort_value = "Giá cao tới thấp";
@@ -102,41 +100,27 @@ exports.getProducts = (req, res, next) => {
 
   var page = +req.query.page || 1;
   let totalItems;
-  let catName = [];
-  Categories.find({}, (err, cats) => {
-    cats.forEach(cat => {
-      catName.push(cat.name);
-    });
-  });
-
-  let childType;
-  if (productType == undefined) {
-    productType = "";
-  } else {
-    Categories.findOne({ name: `${productType}` }, (err, data) => {
-      if (err) console.log(err);
-      if (data) {
-        childType = data.childName || "";
-      } else {
-        childType = "";
-      }
-    });
-  }
-
-  if (productChild == undefined) {
-    productChild = "";
-  }
 
   Products.find({})
     .countDocuments()
     .then(numProduct => {
       totalItems = numProduct;
-      return Products.find({})
+      if(prodType === undefined) {
+        return Products.find({})
         .skip((page - 1) * ITEM_PER_PAGE)
         .limit(ITEM_PER_PAGE)
         .sort({
           price
         });
+      } else {
+        return Products.find({prodType: prodType})
+        .skip((page - 1) * ITEM_PER_PAGE)
+        .limit(ITEM_PER_PAGE)
+        .sort({
+          price
+        });
+      }
+      
     })
     .then(products => {
       res.render("products", {
@@ -144,10 +128,6 @@ exports.getProducts = (req, res, next) => {
         user: req.user,
         allProducts: products,
         currentPage: page,
-        categories: catName,
-        currentCat: productType,
-        currentChild: productChild,
-        categoriesChild: childType,
         hasNextPage: ITEM_PER_PAGE * page < totalItems,
         hasPreviousPage: page > 1,
         nextPage: page + 1,

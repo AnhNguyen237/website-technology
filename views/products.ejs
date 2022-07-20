@@ -93,7 +93,7 @@
 							<div class="tt-sort tt-sort-1">
 								<form class="woocommerce-ordering" method="GET" >
 									<select name="orderby" class="orderby" aria-label="Shop order" onchange="this.form.submit()">
-										
+										<option value="" selected disabled hidden><%= sort_value %></option>
 										<option value="1" >Giá thấp tới cao</option>
 										<option value="-1" >Giá cao tới thấp</option>
 									</select>
@@ -107,7 +107,7 @@
 
 					
 
-								<div class="col-6 col-md-4 col-lg-3">
+								<div class="col-6 col-md-4 col-lg-3 product-interface">
 									<div class="tt-product thumbprod-center">
 										<div class="tt-image-box">
 											
@@ -285,4 +285,11 @@
 
 <% include partials/script %>
 </body>
+<script>
+	var priceElement = document.querySelectorAll('.tt-price');
+	priceElement.forEach( price => {
+		var format = price.textContent.replace(/\B(?=(\d{3})+(?!\d))/g, '.');
+		price.innerHTML = format;
+	})
+</script>
 </html>

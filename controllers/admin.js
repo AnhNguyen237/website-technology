@@ -147,7 +147,7 @@ exports.postEditProduct = (req, res, next) => {
         updateProduct.images.push(req.body.image);
       }
       Products.findByIdAndUpdate(productId, updateProduct)
-        .then(() => res.redirect('/admin/manage-products'))
+        .then(() => res.redirect('back'))
         .catch(next);
     })
 };

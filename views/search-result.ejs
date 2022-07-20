@@ -25,7 +25,7 @@
             <div class="tt-product-listing row">
               <% searchProducts.forEach(function(prod) { %>
 
-              <div class="col-6 col-md-4 col-lg-3">
+              <div class="col-6 col-md-4 col-lg-3 product-interface">
                 <div class="tt-product thumbprod-center">
                   <div class="tt-image-box">
                     <a href="/product/<%= prod._id %>">
@@ -197,4 +197,11 @@
     <% include partials/modal-addtocartproduct %> <% include partials/modal-quickviewmodal %> <% include partials/modal-videoproduct %> <% include
     partials/modal-subscribegood %> <% include partials/modal-newsletter %> <% include partials/script %>
   </body>
+  <script>
+    var priceElement = document.querySelectorAll('.tt-price');
+    priceElement.forEach( price => {
+      var format = price.textContent.replace(/\B(?=(\d{3})+(?!\d))/g, '.');
+      price.innerHTML = format;
+    })
+  </script>
 </html>
