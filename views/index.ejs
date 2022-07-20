@@ -4,7 +4,9 @@
 <body>
 <% include partials/loader %>
 <% include partials/popup %>
-<% include partials/header %>
+<header>
+	<% include partials/header %>
+</header>
 <div id="tt-pageContent">
 	<div class="container-indent nomargin">
 		<div class="container-fluid">
@@ -13,9 +15,9 @@
 					<div class="tp-banner-container">
 						<div class="tp-banner revolution">
 							<ul>
-								<li data-thumb="images/slides/01/slide-01.jpg" data-transition="fade" data-slotamount="1" data-masterspeed="1000" data-saveperformance="off"  data-title="Slide">
-									<img src="/images/slides/01/slide-01.jpg"  alt="slide1"  data-bgposition="center center" data-bgfit="cover" data-bgrepeat="no-repeat" >
-									<div class="tp-caption tp-caption1 lft stb"
+								<li data-thumb="https://clickbuy.cdn.vccloud.vn/uploads/2022/07/ip-wwed-2.png" data-transition="fade" data-slotamount="1" data-masterspeed="1000" data-saveperformance="off"  data-title="Slide">
+									<img src="https://clickbuy.cdn.vccloud.vn/uploads/2022/07/ip-wwed-2.png"  alt="slide1"  data-bgposition="center center" data-bgfit="cover" data-bgrepeat="no-repeat" >
+									<!-- <div class="tp-caption tp-caption1 lft stb"
 										data-x="center"
 										data-y="center"
 										data-hoffset="0"
@@ -28,11 +30,11 @@
 										<div class="tp-caption1-wd-2">Đồ án <br> cuối kì</div>
 										<div class="tp-caption1-wd-3">Môn học phát triển ứng dụng web</div>
 										<div class="tp-caption1-wd-4"><a href="/products" target="_blank" class="btn btn-xl" data-text="Shop Now!">Mua sắm ngay!</a></div>
-									</div>
+									</div> -->
 								</li>
-								<li data-thumb="images/slides/01/slide-02.jpg" data-transition="fade" data-slotamount="1" data-masterspeed="1000" data-saveperformance="off"  data-title="Slide">
-									<img src="/images/slides/01/slide-02.jpg"  alt="slide1"  data-bgposition="center center" data-bgfit="cover" data-bgrepeat="no-repeat" >
-									<div class="tp-caption tp-caption1 lft stb"
+								<li data-thumb="https://clickbuy.cdn.vccloud.vn/uploads/2022/07/photo_2022-06-16_10-48-57.jpg" data-transition="fade" data-slotamount="1" data-masterspeed="1000" data-saveperformance="off"  data-title="Slide">
+									<img src="https://clickbuy.cdn.vccloud.vn/uploads/2022/07/photo_2022-06-16_10-48-57.jpg"  alt="slide1"  data-bgposition="center center" data-bgfit="cover" data-bgrepeat="no-repeat" >
+									<!--<div class="tp-caption tp-caption1 lft stb"
 										data-x="center"
 										data-y="center"
 										data-hoffset="0"
@@ -45,8 +47,60 @@
 										<div class="tp-caption1-wd-2 tt-white-color">Cửa hàng</div>
 										<div class="tp-caption1-wd-3 tt-white-color">Được xây dựng với express.js và ejs</div>
 										<div class="tp-caption1-wd-4"><a href="/products" target="_blank" class="btn btn-xl" data-text="Shop Now!">Mua sắm ngay!</a></div>
-									</div>
+									</div> -->
 								</li>
+								<!-- <li data-thumb="video/video_img.jpg" data-transition="fade" data-slotamount="1" data-masterspeed="1000" data-saveperformance="off"  data-title="Slide">
+									<img src="video/blank.png"  alt="slide1"  data-bgposition="center center" data-bgfit="cover" data-bgrepeat="no-repeat" >
+									
+									<div class="tp-caption tp-fade fadeout fullscreenvideo"
+										data-x="0"
+										data-y="0"
+										data-speed="600"
+										data-start="0"
+										data-easing="Power4.easeOut"
+										data-endspeed="1500"
+										data-endeasing="Power4.easeIn"
+										data-autoplay="true"
+										data-autoplayonlyfirsttime="false"
+										data-nextslideatend="true"
+										data-forceCover="1"
+										data-dottedoverlay="twoxtwo"
+										data-aspectratio="16:9">
+										<video class="video-js vjs-default-skin" preload="none"
+											poster='video/video_img.jpg' data-setup="{}">
+											<source src='video/video.mp4' type='video/mp4'>
+										</video>
+									</div>
+									<div class="tp-caption  tp-fade"
+										data-x="right"
+										data-y="bottom"
+										data-voffset="-60"
+										data-hoffset="-90"
+										data-speed="600"
+										data-start="900"
+										data-easing="Power4.easeOut"
+										data-endeasing="Power4.easeIn">
+										<div class="video-play">
+											<a class="icon-f-29 btn-play" href="#"></a>
+											<a class="icon-f-28 btn-pause" href="#"></a>
+										</div>
+									</div>
+									
+									<div class="tp-caption lfb lft text-center"
+										data-x="center"
+										data-y="center"
+										data-voffset="-20"
+										data-hoffset="0"
+										data-speed="600"
+										data-start="900"
+										data-easing="Power4.easeOut"
+										data-endeasing="Power4.easeIn">
+										<div class="tp-caption1-wd-1 tt-base-color">Oberlo</div>
+										<div class="tp-caption1-wd-2 tt-white-color">Find Products for<br>Shop Store</div>
+										<div class="tp-caption1-wd-3 tt-white-color">Oberlo allows you to easily import dropshipped products directly into your ecommerce store</div>
+										<div class="tp-caption1-wd-4"><a href="/products" target="_blank" class="btn btn-xl" data-text="Shop Now!">Mua sắm ngay!</a></div>
+									</div>
+								</li> -->
 							</ul>
 						</div>
 					</div>
@@ -61,31 +115,31 @@
 					<div class="row">
 						<div class="col-sm-6">
 							<a href="/products" class="tt-promo-box tt-one-child hover-type-2">
-								<img src="/images/loader.svg" data-src="/images/promo/index-promo-img-01.jpg" alt="">
+								<img src="/images/loader.svg" data-src="https://i.imgur.com/S1RfSdG.jpg" alt="">
 								<div class="tt-description">
 									<div class="tt-description-wrapper">
 										<div class="tt-background"></div>
-										<div class="tt-title-small">GIẢM GIÁ</div>
+										<div class="tt-title-small">Siêu giảm giá</div>
 									</div>
 								</div>
 							</a>
 							<a href="/products" class="tt-promo-box tt-one-child hover-type-2">
-								<img src="/images/loader.svg" data-src="/images/promo/index-promo-img-02.jpg" alt="">
+								<img src="/images/loader.svg" data-src="https://i.imgur.com/OzmT9nE.jpg" alt="">
 								<div class="tt-description">
 									<div class="tt-description-wrapper">
 										<div class="tt-background"></div>
-										<div class="tt-title-small">MỚI</div>
+										<div class="tt-title-small">Sản phẩm mới</div>
 									</div>
 								</div>
 							</a>
 						</div>
 						<div class="col-sm-6">
 							<a href="/products" class="tt-promo-box tt-one-child hover-type-2">
-								<img src="/images/loader.svg" data-src="/images/promo/index-promo-img-03.jpg" alt="">
+								<img src="/images/loader.svg" data-src="https://i.pinimg.com/564x/54/ba/d2/54bad28aee4170f9d1f1defc1c326499.jpg" alt="">
 								<div class="tt-description">
 									<div class="tt-description-wrapper">
 										<div class="tt-background"></div>
-										<div class="tt-title-small">THỜI TRANG NỮ</div>
+										<div class="tt-title-small">Đồ chính hãng</div>
 									</div>
 								</div>
 							</a>
@@ -96,33 +150,33 @@
 					<div class="row">
 						<div class="col-sm-6">
 							<a href="/products" class="tt-promo-box tt-one-child hover-type-2">
-								<img src="/images/loader.svg" data-src="/images/promo/index-promo-img-04.jpg" alt="">
+								<img src="/images/loader.svg" data-src="https://i.imgur.com/RZYaTnU.jpg" alt="">
 								<div class="tt-description">
 									<div class="tt-description-wrapper">
 										<div class="tt-background"></div>
-										<div class="tt-title-small">THỜI TRANG NAM</div>
+										<div class="tt-title-small">Smartphone</div>
 									</div>
 								</div>
 							</a>
 						</div>
 						<div class="col-sm-6">
 							<a href="/products" class="tt-promo-box tt-one-child hover-type-2">
-								<img src="/images/loader.svg" data-src="/images/promo/index-promo-img-05.jpg" alt="">
+								<img src="/images/loader.svg" data-src="https://i.imgur.com/w1CUvYg.jpg" alt="">
 								<div class="tt-description">
 									<div class="tt-description-wrapper">
 										<div class="tt-background"></div>
-										<div class="tt-title-small">PHỤ KIỆN</div>
+										<div class="tt-title-small">Laptop</div>
 									</div>
 								</div>
 							</a>
 						</div>
 						<div class="col-sm-12">
 							<a href="/products" class="tt-promo-box tt-one-child">
-								<img src="/images/loader.svg" data-src="/images/promo/index-promo-img-06.jpg" alt="">
+								<img src="/images/loader.svg" data-src="https://i.imgur.com/40XbvxW.png" alt="">
 								<div class="tt-description">
 									<div class="tt-description-wrapper">
 										<div class="tt-background"></div>
-										<div class="tt-title-small">GIÀY</div>
+										<div class="tt-title-small">Ưu đãi siêu khủng - Giảm giá cực sốc</div>
 									</div>
 								</div>
 							</a>
@@ -164,7 +218,7 @@
 								</div>
 								<h2 class="tt-title"><a href="product/<%= prod._id %>"><%= prod.name %></a></h2>
 								<div class="tt-price">
-									<%= prod.price %>₫
+									$<%= prod.price %>
 								</div>
 								<div class="tt-product-inside-hover" >
 									<div class="tt-row-btn">
@@ -237,7 +291,7 @@
               <div class="tt-product-total">
                 <div class="tt-total">
                   TOTAL:
-                  <span class="tt-price"><%= prod.price %>₫</span>
+                  <span class="tt-price">$<%= prod.price %></span>
                 </div>
               </div>
             </div>
@@ -249,12 +303,12 @@
               >
               <a href="/shopping_cart" class="btn btn-border">Xem giỏ hàng</a>
               <%if (typeof(user) !== 'undefined' && user.isAuthenticated) { %>
-				<a href="/add-order" class="btn btn-border">Chuyển đến thanh toán</a>
+				<a href="/add-order" class="btn">Chuyển đến thanh toán</a>
 				<% }else if(typeof(user) == 'undefined'){ %>
-					<a href="/login" class="btn btn-border">Đăng nhập để thanh toán</a>
+					<a href="/login" class="btn">Đăng nhập để thanh toán</a>
 					
 					<% }else if(typeof(user) !== 'undefined' && !user.isAuthenticated){ %>
-						<a href="/verify-email" class="btn btn-border">Kích hoạt email để thanh toán</a>
+						<a href="/verify-email" class="btn">Kích hoạt email để thanh toán</a>
 						<% } %>
             </div>
           </div>
@@ -272,23 +326,23 @@
 			<div class="row tt-layout-promo-box">
 				<div class="col-sm-6 col-md-4">
 					<a href="/products" class="tt-promo-box">
-						<img src="/images/loader.svg" data-src="/images/promo/index-promo-img-07.jpg" alt="">
+						<img src="/images/loader.svg" data-src="https://i.imgur.com/66d9cV4.jpg" alt="">
 						<div class="tt-description">
 							<div class="tt-description-wrapper">
 								<div class="tt-background"></div>
-								<div class="tt-title-small">Xả Hàng Thu Đông</div>
-								<div class="tt-title-large">Giảm gía lên đến <span class="tt-base-color">50%</span></div>
+								<div class="tt-title-small">NGÀY HỘI KHUYẾN MÃI</div>
+								<div class="tt-title-large">GIẢM GIÁ LÊN ĐẾN <span class="tt-base-color">50%</span></div>
 							</div>
 						</div>
 					</a>
 				</div>
 				<div class="col-sm-6 col-md-4">
 					<a href="/products" class="tt-promo-box">
-						<img src="/images/loader.svg" data-src="/images/promo/index-promo-img-08.jpg" alt="">
+						<img src="/images/loader.svg" data-src="https://i.imgur.com/x6Ij7NU.jpg" alt="">
 						<div class="tt-description">
 							<div class="tt-description-wrapper">
 								<div class="tt-background"></div>
-								<div class="tt-title-small">Thời Trang Mùa Hè <span class="tt-base-color">2019</span></div>
+								<div class="tt-title-small">HÀNG MỚI VỀ</div>
 								<div class="tt-title-large">HÀNG MỚI</div>
 							</div>
 						</div>
@@ -296,13 +350,13 @@
 				</div>
 				<div class="col-sm-6 col-md-4">
 					<a href="/products" class="tt-promo-box">
-						<img src="/images/loader.svg" data-src="/images/promo/index-promo-img-09.jpg" alt="">
+						<img src="/images/loader.svg" data-src="https://i.imgur.com/tPDjiXq.png" alt="">
 						<div class="tt-description">
 							<div class="tt-background"></div>
 							<div class="tt-description-wrapper">
 								<div class="tt-background"></div>
-								<div class="tt-title-small">BỘ SƯU TẬP MỚI</div>
-								<div class="tt-title-large"><span class="tt-base-color">TÚI XÁCH TAY</span></div>
+								<div class="tt-title-small">XẢ HÀNG TỒN KHO</div>
+								<div class="tt-title-large">LÊN TỚI <span class="tt-base-color">99%</span></div>
 							</div>
 						</div>
 					</a>
@@ -342,7 +396,7 @@
 								</div>
 								<h2 class="tt-title"><a href="product/<%= prod._id %>"><%= prod.name %></a></h2>
 								<div class="tt-price">
-									<%= prod.price %>₫
+									$<%= prod.price %>
 								</div>
 								<div class="tt-product-inside-hover" >
 									<div class="tt-row-btn">
@@ -415,7 +469,7 @@
               <div class="tt-product-total">
                 <div class="tt-total">
                   TOTAL:
-                  <span class="tt-price"><%= prod.price %>₫</span>
+                  <span class="tt-price">$<%= prod.price %></span>
                 </div>
               </div>
             </div>
@@ -558,7 +612,7 @@
 						</div>
 						<div class="tt-col-description">
 							<h4 class="tt-title">Vận chuyển miễn phí</h4>
-							<p>Miễn phí vận chuyển toàn quốc</p>
+							<p>Vận chuyển miễn phí vơí mọi đơn hàng trên 100$</p>
 						</div>
 					</a>
 				</div>
@@ -569,7 +623,7 @@
 						</div>
 						<div class="tt-col-description">
 							<h4 class="tt-title">Hỗ trợ 24/7</h4>
-							<p>Tổng đài làm việc 24/7</p>
+							<p>Liên lạc 24/7 Liên lạc 24/7 Liên lạc 24/7</p>
 						</div>
 					</a>
 				</div>
