@@ -86,8 +86,8 @@
 								</div>
 								<a href="#">(<%= allComment %> đánh giá)</a>
 							</div>
-							<div class="tt-price">
-								<span class="new-price"><%= prod.newPrice %>₫</span>
+							<div>
+								<span class="tt-price new-price"><%= prod.price %>₫</span>
 								<span class="old-price"><%= prod.oldPrice %>₫</span>
 							</div>
 							
@@ -464,12 +464,9 @@
                 <h2 class="tt-title">
                   <a href="/product/<%= prod.name %>"><%= prod.name %></a>
                 </h2>
-
-                <div class="tt-qty">QTY: <span>1</span></div>
               </div>
               <div class="tt-product-total">
                 <div class="tt-total">
-                  TOTAL:
                   <span class="tt-price"><%= prod.price %>₫</span>
                 </div>
               </div>
@@ -548,4 +545,12 @@
 <% include partials/script %>
 
 </body>
+
+<script>
+	var priceElement = document.querySelectorAll('.tt-price');
+	priceElement.forEach( price => {
+		var format = price.textContent.replace(/\B(?=(\d{3})+(?!\d))/g, '.');
+		price.innerHTML = format;
+	})
+</script>
 </html>

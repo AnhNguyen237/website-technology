@@ -23,11 +23,12 @@ exports.getIndexProducts = (req, res, next) => {
 
   Products.find()
     .limit(8)
+    .sort({viewCounts: -1})
     .then(products => {
       
       Products.find()
         .limit(8)
-        .sort("buyCounts")
+        .sort({buyCounts: -1})
         .then(products2 => {
           res.render("index", {
             title: "Trang chủ",
@@ -53,10 +54,11 @@ exports.getProduct = (req, res, next) => {
   }
   const prodId = req.params.productId;
   Products.findOne({ _id: `${prodId}` }).then(product => {
+
+    product.viewCounts = product.viewCounts + 1;
+
     product.oldPrice = Math.round(product.price*1.1);
     product.oldPrice = product.oldPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.');
-    product.newPrice = Math.round(product.price);
-    product.newPrice = product.newPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.');
     Products.find({ _id: {$ne: prodId}, brand: product.brand }).then(
       relatedProducts => {
         res.render("product", {
@@ -329,6 +331,7 @@ exports.postAddOrder = async (req, res, next) => {
       await Products.findOne({ _id: id })
         .then(product => {
           product.buyCounts += parseInt(req.session.cart.items[id].qty);
+          product.stock -= parseInt(req.session.cart.items[id].qty);
           product.save();
         })
         .catch(err => console.log(err));

@@ -235,15 +235,48 @@ exports.postOrderDetail = (req, res, next) => {
 
 // Thống kê doanh số
 exports.getStatistics = (req, res, next) => {
-  Orders.find({})
-    .then(orders => {
-      orders.forEach(order => {
-        console.log(order)
+  var qtySmartphone = 0;
+  var priceSmartphone = 0;
+  var qtyLaptop = 0;
+  var priceLaptop = 0;
+  var qtyiPad = 0;
+  var priceiPad = 0;
+  var qtyTotal = 0;
+  var priceTotal = 0;
+  Products.find({})
+    .then(products => {
+      products.forEach(product => {
+        switch(product.prodType) {
+          case 'smartphone':
+            qtySmartphone += product.buyCounts;
+            priceSmartphone += product.price*product.buyCounts;
+            break;
+          case 'laptop':
+            qtyLaptop += product.buyCounts;
+            priceLaptop += product.price*product.buyCounts;
+            break;
+          case 'iPad':
+            qtyiPad += product.buyCounts;
+            priceiPad += product.price*product.buyCounts;
+            break;
+        }
       })
+
+      qtyTotal = qtySmartphone + qtyLaptop + qtyiPad;
+      priceTotal = priceSmartphone + priceLaptop + priceiPad;
+
+      res.render('admin/statistics', {
+        user: req.user,
+        qtySmartphone,
+        qtyLaptop,
+        qtyiPad,
+        qtyTotal,
+        priceSmartphone,
+        priceLaptop,
+        priceiPad,
+        priceTotal
+      });
     })
-  res.render('admin/statistics', {
-    user: req.user,
-  });
 };
 
 var cache;

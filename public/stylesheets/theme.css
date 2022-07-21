@@ -31132,4 +31132,6 @@ html:not(.mac):not(.touch-device) .tt-carousel-brands .slick-track {
 .old-price {
   color: #99a2aa!important;
   font-size: 20px;
+  text-decoration: line-through;
+  font-weight: 600!important;
 }

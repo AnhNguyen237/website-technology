@@ -26,33 +26,33 @@
                     <table class='table table-bordered'>
                         <thead class="table-primary">
                             <tr>
-                                <th scope='col'>Loại sản phẩm</th>
-                                <th scope='col'>Số lượng bán ra</th>
-                                <th scope='col'>Doanh thu</th>
+                                <th scope='col'>Loại sản phẩm <br> -</th>
+                                <th scope='col'>Số lượng bán ra <br>(sản phẩm)</th>
+                                <th scope='col'>Doanh thu <br>(VNĐ)</th>
                             </tr>
                         </thead>
                         <tbody class='table-group-divider'>
                                 <tr>
                                     <td>Điện thoại</td>
-                                    <td>20</td>
-                                    <td>250 000 000</td>
+                                    <td class="format"><%=qtySmartphone%></td>
+                                    <td class="format"><%=priceSmartphone%></td>
                                 </tr>
                                 <tr>
                                     <td>Laptop</td>
-                                    <td>25</td>
-                                    <td>500 000 000</td>
+                                    <td class="format"><%=qtyLaptop%></td>
+                                    <td class="format"><%=priceLaptop%></td>
                                 </tr>
                                 <tr>
                                     <td>Máy tính bảng</td>
-                                    <td>30</td>
-                                    <td>750 000 000</td>
+                                    <td class="format"><%=qtyiPad%></td>
+                                    <td class="format"><%=priceiPad%></td>
                                 </tr>
                         </tbody>
                         <thead class="table-success">
                             <tr>
                                 <th scope='col'>Tổng</th>
-                                <th scope='col'>75</th>
-                                <th scope='col'>1 500 000 000</th>
+                                <td class="format"><%=qtyTotal%></td>
+                                    <td class="format"><%=priceTotal%></td>
                             </tr>
                         </thead>
                     </table>
@@ -89,6 +89,12 @@
 </body>
 <% include ../partials/script %>
 <script>
+
+    var priceElement = document.querySelectorAll('.format');
+        priceElement.forEach( price => {
+            var format = price.textContent.replace(/\B(?=(\d{3})+(?!\d))/g, '.');
+            price.innerHTML = format;
+        })
 
     var year = document.getElementById("year");
     var total = document.getElementById("total");
